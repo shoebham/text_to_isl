@@ -7,6 +7,9 @@ from nltk.tokenize import sent_tokenize
 import stanza
 from stanza.server import CoreNLPClient
 
+
+
+
 # text = "Chris Manning is a nice person. Chris wrote a simple sentence. He also gives oranges to people."
 # with CoreNLPClient(annotators=['tokenize','ssplit','pos','lemma','ner', 'parse'], timeout=30000, memory='16G') as client:
 #     # submit the request to the server
@@ -45,7 +48,7 @@ from stanza.server import CoreNLPClient
 # # print(word_tokenize(test_text))
 
 # pipeline for english model in stanza
-en_nlp = stanza.Pipeline('en')
+en_nlp = stanza.Pipeline('en',processors={'tokenize':'spacy'})	
 
 
 # # text for parsing in stanza
@@ -110,6 +113,8 @@ def get_lemma_from_sentence(sentence):
 
 # Gets the xpos (penn tree bank pos)
 def get_xpos_of_words(sentence):
+
+	
 	pos=[];
 	try:
 		for word in sentence.words:
@@ -125,40 +130,106 @@ def get_xpos_of_words(sentence):
 
 # removes unwanted POS words
 def remove_stop_words(sentence):
+	if final_text:
+		final_text.clear()
 	for sentence in sentence.sentences:
+		temp_text=[]
 		for words in sentence.words:
-			if(words.xpos not in unwanted_pos):
-				final_text.append(words.text)
+			if((words.xpos not in unwanted_pos) and words.text not in linking_verbs and words.upos!="PUNCT"):
+				temp_text.append(words.text)
+		final_text.append(temp_text)
 
 final_text = [];
+
+# captialize first character for sentence splitting (stanza)
+# def capitalize_first_char(sentence):
 
 # TO, POS(possessive ending), MD(Modals),
 # FW(Foreign word), CC(coordinating conjuction), some DT(determiners like a, an,the), 
 # JJR, JJS(adjectives, comparative and superlative), 
 # NNS, NNPS(nouns plural, proper plural), RP(particles), SYM(symbols)
-
-unwanted_pos= ["TO","POS","MD","FW","CC","DT","JJR","JJS","NNS","NNP","NNPS","RP","SYM"]
-test_sentence_with_unwanted_pos= en_nlp('''Chris\'s car <-POS.
-					to go <-TO.
-					can could should must might<-MD.
-					Bonjour<-FW.
-					for and nor but or yet so<-CC.
-					a an the that this those<-DT.
-					stronger bigger larger happier better<-JJR (adj comparitive).
-					strongest biggest largest happiest best <-JJS.
-					cats dogs animals humans<-NNS.
-					India, Delhi, Mumbai <-NNPS.
-					call off, lay in on, throw up, lay off, get a grip <- RR.
-					+-*/<-SYM.
-					''');
+# VBD- Past tense verb ,VBZ- Verb 3rd person present ,VBG- verb present participle 
+# VBP- Non 3rd person singular present, VBN- verb past participle 
+unwanted_pos= ["TO","POS","MD","FW","CC","DT","JJR","JJS","NNS","NNPS","RP","SYM","VBD","VBZ","VBG","VBN","PUNCT"]
+linking_verbs = ["am","is","are","was","were","have","be"]
+test_sentence_with_unwanted_pos=en_nlp('''
+Chris\'s car was towed.
+I can go there.
+Bonjour, je suis shubham.
+I have not had breakfast yet.
+That is something.
+I am stronger than him.
+I am the strongest.
+I love cats and dogs.
+I live in India.
+My flight was called off.
+'''.strip().replace("\n",""))
+print('''
+Chris\'s car was towed.
+I can go there.
+Bonjour, je suis shubham.
+I have not had breakfast yet.
+That is something.
+I am stronger than him.
+I am the strongest.
+I love cats and dogs.
+I live in India.
+My flight was called off.
+'''.strip().replace("\n",""))
+# test_sentence_with_unwanted_pos= en_nlp('''Chris\'s car <-POS.
+# 					to go <-TO.
+# 					can could should must might<-MD.
+# 					Bonjour<-FW.
+# 					for and nor but or yet so<-CC.
+# 					a an the that this those<-Dno maam i meant zT.
+# 					stronger bigger larger happier better<-JJR (adj comparitive).
+# 					strongest biggest largest happiest best <-JJS.
+# 					cats dogs animals humans<-NNS.
+# 					India, Delhi, Mumbai <-NNPS.
+# 					call off, lay in on, throw up, lay off, get a grip <- RP.
+# 					+-*/<-SYM.
+# 					''');
 # test_unwanted_pos=get_xpos_of_words(test_sentence_with_unwanted_pos);
+
+# def remove_punc(sentence):
+
 
 lemma_words,pos_words=parse_from_stanza(test_sentence_with_unwanted_pos)
 # for words in test_unwanted_pos:
 # 	print(words)
 
 
+for i, sentence in enumerate(test_sentence_with_unwanted_pos.sentences):
+    print(f'====== Sentence {i+1} tokens =======')
+    print(*[f'id: {token.id}\ttext: {token.text}' for token in sentence.tokens], sep='\n')
+
+# lemmatized words
+print("---------Lemmatized sentences--------------")
+test_sentence_with_unwanted_pos_lemmatized ='';
+for word in lemma_words:
+	
+	test_sentence_with_unwanted_pos_lemmatized+= ' '.join(word)+' '+'\n';
+
+# print(en_nlp(test_sentence_with_unwanted_pos_lemmatized))
+print(test_sentence_with_unwanted_pos_lemmatized)
+test_sentence_with_unwanted_pos_lemmatized=test_sentence_with_unwanted_pos_lemmatized.strip().replace("\n","")
+print(test_sentence_with_unwanted_pos_lemmatized)
+
+
+# for i, sentence in enumerate(en_nlp(test_sentence_with_unwanted_pos).sentences):
+#     print(f'====== Sentence {i+1} tokens =======')
+#     print(*[f'id: {token.id}\ttext: {token.text}' for token in sentence.tokens], sep='\n')
+
+
+
+# stop word removal without lemmatization 
+print("=====================stop word removal before lemmatization====================")
 remove_stop_words(test_sentence_with_unwanted_pos)
+print(final_text)
+
+# stop word removal with lemmatization 
+print("=====================stop word removal after lemmatization====================")
+remove_stop_words(en_nlp(test_sentence_with_unwanted_pos_lemmatized))
 print(final_text)
 
 
@@ -166,7 +237,7 @@ print(final_text)
 # for word in lemma_words:
 # 	print(word)
 
-# POS WORDS
+# # POS WORDS
 print("-----POS-----------------")
 for word in pos_words:
 	print(word)
