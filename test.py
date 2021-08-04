@@ -112,9 +112,7 @@ def get_lemma_from_sentence(sentence):
 # 		print(exception)
 
 # Gets the xpos (penn tree bank pos)
-def get_xpos_of_words(sentence):
-
-	
+def get_xpos_of_words(sentence):	
 	pos=[];
 	try:
 		for word in sentence.words:
@@ -163,25 +161,15 @@ I am the strongest.
 I love cats and dogs.
 I live in India.
 My flight was called off.
+This is a test sentence.
 '''.strip().replace("\n",""))
-print('''
-Chris\'s car was towed.
-I can go there.
-Bonjour, je suis shubham.
-I have not had breakfast yet.
-That is something.
-I am stronger than him.
-I am the strongest.
-I love cats and dogs.
-I live in India.
-My flight was called off.
-'''.strip().replace("\n",""))
+
 # test_sentence_with_unwanted_pos= en_nlp('''Chris\'s car <-POS.
 # 					to go <-TO.
 # 					can could should must might<-MD.
 # 					Bonjour<-FW.
 # 					for and nor but or yet so<-CC.
-# 					a an the that this those<-Dno maam i meant zT.
+# 					a an the that this those<-DT.
 # 					stronger bigger larger happier better<-JJR (adj comparitive).
 # 					strongest biggest largest happiest best <-JJS.
 # 					cats dogs animals humans<-NNS.
