@@ -8,6 +8,10 @@ from nltk.corpus import stopwords
 from nltk.parse.stanford import StanfordParser
 from nltk.tree import *
 
+from flask import Flask,request,render_template
+
+app =Flask(__name__)
+
 import stanza
 from stanza.server import CoreNLPClient
 import pprint 
@@ -272,8 +276,26 @@ def final_output(input):
 	return fin_words
 
 final_output_in_sent=[];
+
 for words in final_words:
 	final_output_in_sent.append(final_output(words));
-	
 
+
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/',methods=['GET','POST'])
+def flask_test():
+	text = request.form['text']
+	print("text is", text)
+	return render_template('index.html',result = text)
+
+
+
+# my_form();
 pprint.pprint(final_output_in_sent)
+
+if __name__=="__main__":
+	app.run(debug=True)

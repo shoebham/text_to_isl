@@ -7,15 +7,17 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+    <!-- <link rel='stylesheet' type='text/css' media='screen' href='style.css'> -->
     <!-- <link rel="stylesheet" href="http://vhg.cmp.uea.ac.uk/tech/jas/vhg2021/cwa/cwasa.css" />
     <script type="text/javascript" src="http://vhg.cmp.uea.ac.uk/tech/jas/vhg2021/cwa/allcsa.js"></script> -->
 
-    
-    <link rel="stylesheet"
+    <link rel="stylesheet" href="http://vhg.cmp.uea.ac.uk/tech/jas/vhg2021/cwa/cwasa.css" />
+    <script type="text/javascript" src="http://vhg.cmp.uea.ac.uk/tech/jas/vhg2021/cwa/allcsa.js"></script>
+
+    <!-- <link rel="stylesheet"
     href="http://localhost/jas/loc2021/cwa/cwasa.css">
     <script type="text/javascript"
-    src="http://localhost/jas/loc2021/cwa/allcsa.js"></script>
+    src="http://localhost/jas/loc2021/cwa/allcsa.js"></script> -->
     <!-- player css and js files -->
     <!-- <link rel="stylesheet" href="css/cwasa.css" /> -->
     <!-- <script type="text/javascript" src="js/allcsa.js"></script> -->
@@ -126,7 +128,10 @@ function startPlayer(sigmlURL) {
             
         </div>
         <div class="englishInput">
-            Input:<input type="text">
+            <form method="POST">
+            Input:<input type="text" name="text">
+            <input type = "submit">
+            </form>
             <!-- <button class="btn-primary bttnPlaySiGMLURL av0">Submit</button> -->
             <!-- <input type="button" value="Sign" class="bttnPlaySiGMLURL av0" /> -->
         </div>
@@ -142,9 +147,9 @@ function startPlayer(sigmlURL) {
        
     </div>
 </div>
-    <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='./js/script.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="js/player.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='./js/player.js') }}"></script>
         <!-- <script type="text/javascript" src="js/sigmlFiles.json"></script> -->
         <!-- <script type="text/javascript" src="js/handler.js"></script> -->
 </body>
