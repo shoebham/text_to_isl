@@ -8,9 +8,9 @@ from nltk.corpus import stopwords
 from nltk.parse.stanford import StanfordParser
 from nltk.tree import *
 
-from flask import Flask,request,render_template
+from flask import Flask,request,render_template,send_from_directory
 
-app =Flask(__name__)
+app =Flask(__name__,static_folder='static', static_url_path='')
 
 import stanza
 from stanza.server import CoreNLPClient
@@ -38,23 +38,23 @@ en_nlp = stanza.Pipeline('en',processors={'tokenize':'spacy'})
 stop_words = set(["am","are","is","was","were","be","being","been","have","has","had",
 					"does","did","could","should","would","can","shall","will","may","might","must","let"]);
 
-test_input='''
-					How are you.
-					Chris\'s car was towed.
-					I can go there.
-					I have not had breakfast yet.
-					That is something.
-					I am stronger than him.
-					I am the strongest.
-					I love cats and dogs.
-					I live in India.
-					My flight was called off.
-					this is a test sentence.
-					'''.strip().replace("\n","").replace("\t","")
-test_input2=""
-for word in test_input.split("."):
-	test_input2+= word.capitalize()+".";
-some_text= en_nlp(test_input2);
+# test_input='''
+# 					How are you.
+# 					Chris\'s car was towed.
+# 					I can go there.
+# 					I have not had breakfast yet.
+# 					That is something.
+# 					I am stronger than him.
+# 					I am the strongest.
+# 					I love cats and dogs.
+# 					I live in India.
+# 					My flight was called off.
+# 					this is a test sentence.
+# 					'''.strip().replace("\n","").replace("\t","")
+# test_input2=""
+# for word in test_input.split("."):
+# 	test_input2+= word.capitalize()+".";
+# some_text= en_nlp(test_input2);
 
 
 
@@ -71,6 +71,7 @@ word_list=[];
 word_list_detailed=[];
 
 def convert_to_sentence_list(text):
+	print("text here is ",text)
 	for sentence in text.sentences:
 		sent_list.append(sentence.text)
 		sent_list_detailed.append(sentence)
@@ -202,6 +203,7 @@ def modify_tree_structure(parent_tree):
 
 
 def reorder_eng_to_isl(input_string):
+
 	parser = StanfordParser()
 	# Generates all possible parse trees sort by probability for the sentence
 	possible_parse_tree_list = [tree for tree in parser.parse(input_string)]
@@ -220,8 +222,6 @@ def reorder_eng_to_isl(input_string):
 final_words= [];
 final_words_detailed=[];
 
-convert_to_sentence_list(some_text);
-convert_to_word_list(sent_list_detailed);
 
 # pre processing text
 def pre_process(text):
@@ -242,20 +242,6 @@ def pre_process(text):
 # pprint.pprint(final_words);
 
 
-# reorders the words in input
-for i,words in enumerate(word_list):
-	# print(words)
-	# print(reorder_eng_to_isl(words))
-	word_list[i]=reorder_eng_to_isl(words)
-	# for word in words:
-# 		print("".join(word))
-
-# removes punctuation and lemmatizes words
-pre_process(some_text);
-print("--------------------Word List------------------------");
-pprint.pprint(word_list)
-print("--------------------Final Words------------------------");
-pprint.pprint(final_words);
 
 
 
@@ -277,25 +263,79 @@ def final_output(input):
 
 final_output_in_sent=[];
 
-for words in final_words:
-	final_output_in_sent.append(final_output(words));
+def convert_to_final():
+	for words in final_words:
+		final_output_in_sent.append(final_output(words));
 
 
+
+def take_input(text):
+	test_input=text.strip().replace("\n","").replace("\t","")
+	test_input2=""
+	for word in test_input.split("."):
+		test_input2+= word.capitalize()+".";
+	some_text= en_nlp(test_input2);
+	convert(some_text);
+
+
+def convert(some_text):
+	convert_to_sentence_list(some_text);
+	convert_to_word_list(sent_list_detailed)
+
+	# reorders the words in input
+	for i,words in enumerate(word_list):
+		# print(words)
+		# print(reorder_eng_to_isl(words))
+		word_list[i]=reorder_eng_to_isl(words)
+		# for word in words:
+	# 		print("".join(word))
+	# removes punctuation and lemmatizes words
+	pre_process(some_text);
+	convert_to_final();
+	print_lists();
+	
+
+def print_lists():
+	print("--------------------Word List------------------------");
+	pprint.pprint(word_list)
+	print("--------------------Final Words------------------------");
+	pprint.pprint(final_words);
+	print("---------------Final sentence with letters--------------");
+	pprint.pprint(final_output_in_sent)
+
+def clear_all():
+	sent_list.clear();
+	sent_list_detailed.clear();
+	word_list.clear();
+	word_list_detailed.clear();
+	final_words.clear();
+	final_words_detailed.clear();
+	final_output_in_sent.clear();
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+	clear_all();
+	return render_template('index.html')
+
 
 @app.route('/',methods=['GET','POST'])
 def flask_test():
+	clear_all()
 	text = request.form['text']
 	print("text is", text)
-	return render_template('index.html',result = text)
+	take_input(text)
+	# result = [{"text1":"testing/////////......."}];
+	# clear_all()
+	return render_template('index.html',result = final_words,signres= final_output_in_sent)
 
 
+@app.route('/static/<path:path>')
+def serve_signfiles(path):
+	print("here");
+	return send_from_directory('static',path)
 
 # my_form();
-pprint.pprint(final_output_in_sent)
+
 
 if __name__=="__main__":
 	app.run(debug=True)

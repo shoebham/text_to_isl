@@ -2,7 +2,7 @@ function test_list()
 {
     
     let ul = document.querySelector(".test_list");
-    fetch('http://localhost/SPIT/Summer_project/text_to_isl/UI/js/sigmlFiles.json')
+    fetch('static/js/sigmlFiles.json')
     .then(response => response.json())
      .then((data)=>
      {
@@ -30,3 +30,19 @@ $('a').click(function(event){
     event.preventDefault();
     //do whatever
   });
+
+//   let form = document.getElementById('form');
+//   form.addEventListener('submit', function(event) {
+//     event.preventDefault();    // prevent page from refreshing
+//     const formData = new FormData(form);  // grab the data inside the form fields
+//     fetch('/', {   // assuming the backend is hosted on the same server
+//         method: 'POST',
+//         body: formData,
+//     }).then(function(response) {
+//         // do something with the response if needed.
+//         // If you want the table to be built only after the backend handles the request and replies, call buildTable() here.
+//         console.log("response = ",response);
+//         console.log("{{response}}");
+//         console.log("{{result}}");
+//     });
+// });

@@ -150,19 +150,7 @@ final_text = [];
 # VBP- Non 3rd person singular present, VBN- verb past participle 
 unwanted_pos= ["TO","POS","MD","FW","CC","DT","JJR","JJS","NNS","NNPS","RP","SYM","VBD","VBZ","VBG","VBN","PUNCT"]
 linking_verbs = ["am","is","are","was","were","have","be"]
-test_sentence_with_unwanted_pos=en_nlp('''
-Chris\'s car was towed.
-I can go there.
-Bonjour, je suis shubham.
-I have not had breakfast yet.
-That is something.
-I am stronger than him.
-I am the strongest.
-I love cats and dogs.
-I live in India.
-My flight was called off.
-This is a test sentence.
-'''.strip().replace("\n",""))
+test_sentence_with_unwanted_pos=en_nlp('hello'.strip().replace("\n",""))
 
 # test_sentence_with_unwanted_pos= en_nlp('''Chris\'s car <-POS.
 # 					to go <-TO.
@@ -195,7 +183,6 @@ for i, sentence in enumerate(test_sentence_with_unwanted_pos.sentences):
 print("---------Lemmatized sentences--------------")
 test_sentence_with_unwanted_pos_lemmatized ='';
 for word in lemma_words:
-	
 	test_sentence_with_unwanted_pos_lemmatized+= ' '.join(word)+' '+'\n';
 
 # print(en_nlp(test_sentence_with_unwanted_pos_lemmatized))
@@ -229,6 +216,7 @@ print(final_text)
 print("-----POS-----------------")
 for word in pos_words:
 	print(word)
+
 
 
 # lemma_words,pos_words=parse_from_stanza(some_text)
