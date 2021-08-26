@@ -1,3 +1,4 @@
+import json
 import os
 from nltk.parse import stanford
 import stanza 
@@ -8,7 +9,7 @@ from nltk.corpus import stopwords
 from nltk.parse.stanford import StanfordParser
 from nltk.tree import *
 
-from flask import Flask,request,render_template,send_from_directory
+from flask import Flask,request,render_template,send_from_directory,jsonify
 
 app =Flask(__name__,static_folder='static', static_url_path='')
 
@@ -204,6 +205,9 @@ def modify_tree_structure(parent_tree):
 
 def reorder_eng_to_isl(input_string):
 
+	if len(input_string) is 1:
+		return input_string
+
 	parser = StanfordParser()
 	# Generates all possible parse trees sort by probability for the sentence
 	possible_parse_tree_list = [tree for tree in parser.parse(input_string)]
@@ -311,7 +315,10 @@ def clear_all():
 	final_words.clear();
 	final_words_detailed.clear();
 	final_output_in_sent.clear();
+	final_words_dict.clear();
 
+
+final_words_dict = {};
 @app.route('/')
 def index():
 	clear_all();
@@ -321,12 +328,18 @@ def index():
 @app.route('/',methods=['GET','POST'])
 def flask_test():
 	clear_all()
-	text = request.form['text']
+	text = request.form.get('text')
 	print("text is", text)
 	take_input(text)
 	# result = [{"text1":"testing/////////......."}];
 	# clear_all()
-	return render_template('index.html',result = final_words,signres= final_output_in_sent)
+	# final_output_in_json = {'isl_text_with_letters':final_output_in_sent}
+	for words in final_output_in_sent:
+		for i,word in enumerate(words,start=1):
+			final_words_dict[i]=word;
+	print("---------------Final words dict--------------");
+	print(final_words_dict)
+	return render_template('index.html',result = final_words,signres=final_words_dict)
 
 
 @app.route('/static/<path:path>')
