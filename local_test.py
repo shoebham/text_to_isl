@@ -47,7 +47,7 @@ stop_words = set(["am","are","is","was","were","be","being","been","have","has",
 # 					My flight was called off.
 # 					this is a test sentence.
 # 					'''.strip().replace("\n","").replace("\t","")
-test_input='a b c d.'.strip().replace("\n","").replace("\t","")
+test_input='how are you'.strip().replace("\n","").replace("\t","")
 test_input2="";
 test_input2_list=test_input.split(".");
 for word in test_input.split("."):
@@ -209,13 +209,20 @@ def reorder_eng_to_isl(input_string):
 	print("INPUT------------")
 	print(input_string)
 	flag=False;
+	count=0
 	for word in input_string:
-		if (len(word)==1):
-			flag=True;
-		else:
-			flag=False;
-	if(flag):
+		if(len(word)==1):
+			count+=1;
+
+	if(count==len(input_string)):
 		return input_string;
+	# for i,word in enumerate(input_string):
+	# 	if (len(word)==1):
+	# 		flag=True;
+	# 	else:
+	# 		flag=False;
+	# if(flag):
+	# 	return input_string;
 
 	parser = StanfordParser()
 	# Generates all possible parse trees sort by probability for the sentence

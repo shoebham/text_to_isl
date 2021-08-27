@@ -205,16 +205,23 @@ def modify_tree_structure(parent_tree):
 
 def reorder_eng_to_isl(input_string):
 
-	flag=False;
+	count=0
 	for word in input_string:
-		if (len(word)==1):
-			flag=True;
-		else:
-			flag=False;
-		if(flag):
-			return input_string;
-	if len(input_string) is 1:
-		return input_string
+		if(len(word)==1):
+			count+=1;
+
+	if(count==len(input_string)):
+		return input_string;
+	# flag=False;
+	# for word in input_string:
+	# 	if (len(word)==1):
+	# 		flag=True;
+	# 	else:
+	# 		flag=False;
+	# 	if(flag):
+	# 		return input_string;
+	# if len(input_string) is 1:
+	# 	return input_string
 
 	parser = StanfordParser()
 	# Generates all possible parse trees sort by probability for the sentence
