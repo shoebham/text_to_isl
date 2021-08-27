@@ -47,10 +47,12 @@ stop_words = set(["am","are","is","was","were","be","being","been","have","has",
 # 					My flight was called off.
 # 					this is a test sentence.
 # 					'''.strip().replace("\n","").replace("\t","")
-test_input='c.'.strip().replace("\n","").replace("\t","")
-test_input2=""
+test_input='a b c d.'.strip().replace("\n","").replace("\t","")
+test_input2="";
+test_input2_list=test_input.split(".");
 for word in test_input.split("."):
-	test_input2+= word.capitalize()+".";
+	test_input2+= word.capitalize()+" .";
+print("test_input2",test_input2)
 some_text= en_nlp(test_input2);
 
 
@@ -69,8 +71,12 @@ word_list_detailed=[];
 
 def convert_to_sentence_list(text):
 	for sentence in text.sentences:
+		print("----------sentences---------------------")
+		print(sentence)
 		sent_list.append(sentence.text)
 		sent_list_detailed.append(sentence)
+	print("----------sentlist---------------------")
+	print(sent_list);
 
 
 # converts to words array for each sentence. ex=[ ["This","is","a","test","sentence"]];
@@ -199,6 +205,18 @@ def modify_tree_structure(parent_tree):
 
 
 def reorder_eng_to_isl(input_string):
+
+	print("INPUT------------")
+	print(input_string)
+	flag=False;
+	for word in input_string:
+		if (len(word)==1):
+			flag=True;
+		else:
+			flag=False;
+	if(flag):
+		return input_string;
+
 	parser = StanfordParser()
 	# Generates all possible parse trees sort by probability for the sentence
 	possible_parse_tree_list = [tree for tree in parser.parse(input_string)]
@@ -218,16 +236,22 @@ final_words= [];
 final_words_detailed=[];
 
 convert_to_sentence_list(some_text);
-convert_to_word_list(sent_list_detailed);
 
+convert_to_word_list(sent_list_detailed);
 # pre processing text
 def pre_process(text):
 	 #converts sentences to words
 	# print(sent_list_detailed)
 	# global final_words;
+	
+
 	remove_punct(word_list)
 	final_words.extend(filter_words(word_list));
+	print("in pre_process",final_words);
+	print("in pre_process",word_list);
+
 	lemmatize(final_words)
+	print("in pre_process",final_words);
 
 # print("--------------------Sent List------------------------");
 # pprint.pprint(sent_list)
@@ -246,7 +270,7 @@ for i,words in enumerate(word_list):
 	word_list[i]=reorder_eng_to_isl(words)
 	# for word in words:
 # 		print("".join(word))
-
+print("before pre_process",word_list);	
 # removes punctuation and lemmatizes words
 pre_process(some_text);
 print("--------------------Word List------------------------");
@@ -260,7 +284,7 @@ def final_output(input):
 	final_string=""
 	valid_words=open("words.txt",'r').read();
 	print("----------valid_words---------")
-	print(valid_words.split('\n'))
+	# print(valid_words.split('\n'))
 	valid_words=valid_words.split('\n')
 	fin_words=[]
 	for word in input:
@@ -279,4 +303,6 @@ for words in final_words:
 	final_output_in_sent.append(final_output(words));
 	
 
+pprint.pprint(final_output_in_sent)
+remove_punct(final_output_in_sent)
 pprint.pprint(final_output_in_sent)

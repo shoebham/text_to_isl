@@ -107,6 +107,7 @@ function play_each_word2(){
               clearInterval(int);
               finalHint = $("#inputText").val();
               $("#textHint").html(finalHint);
+              document.querySelector("#submit").disabled=false;
           }
       } else if(playerAvailableToPlay) {
               playerAvailableToPlay = false;
@@ -123,6 +124,7 @@ function play_each_word2(){
             display_err_message();
             if(errtext.indexOf("invalid") != -1) {
                 playerAvailableToPlay=true;
+                document.querySelector("#submit").disabled=false;
             }
          }
   }, 1000);

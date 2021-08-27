@@ -205,6 +205,14 @@ def modify_tree_structure(parent_tree):
 
 def reorder_eng_to_isl(input_string):
 
+	flag=False;
+	for word in input_string:
+		if (len(word)==1):
+			flag=True;
+		else:
+			flag=False;
+		if(flag):
+			return input_string;
 	if len(input_string) is 1:
 		return input_string
 
@@ -280,7 +288,7 @@ def take_input(text):
 		test_input2=test_input;
 	else:
 		for word in test_input.split("."):
-			test_input2+= word.capitalize()+".";
+			test_input2+= word.capitalize()+" .";
 
 
 	some_text= en_nlp(test_input2);
@@ -301,6 +309,7 @@ def convert(some_text):
 	# removes punctuation and lemmatizes words
 	pre_process(some_text);
 	convert_to_final();
+	remove_punct(final_output_in_sent)
 	print_lists();
 	
 
