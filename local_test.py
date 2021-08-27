@@ -34,20 +34,20 @@ en_nlp = stanza.Pipeline('en',processors={'tokenize':'spacy'})
 stop_words = set(["am","are","is","was","were","be","being","been","have","has","had",
 					"does","did","could","should","would","can","shall","will","may","might","must","let"]);
 
-test_input='''
-					How are you.
-					Chris\'s car was towed.
-					I can go there.
-					I have not had breakfast yet.
-					That is something.
-					I am stronger than him.
-					I am the strongest.
-					I love cats and dogs.
-					I live in India.
-					My flight was called off.
-					this is a test sentence.
-					'''.strip().replace("\n","").replace("\t","")
-# test_input='how are you'.strip().replace("\n","").replace("\t","")
+# test_input='''
+# 					How are you.
+# 					Chris\'s car was towed.
+# 					I can go there.
+# 					I have not had breakfast yet.
+# 					That is something.
+# 					I am stronger than him.
+# 					I am the strongest.
+# 					I love cats and dogs.
+# 					I live in India.
+# 					My flight was called off.
+# 					this is a test sentence.
+# 					'''.strip().replace("\n","").replace("\t","")
+test_input='c.'.strip().replace("\n","").replace("\t","")
 test_input2=""
 for word in test_input.split("."):
 	test_input2+= word.capitalize()+".";
@@ -259,7 +259,9 @@ pprint.pprint(final_words);
 def final_output(input):
 	final_string=""
 	valid_words=open("words.txt",'r').read();
-
+	print("----------valid_words---------")
+	print(valid_words.split('\n'))
+	valid_words=valid_words.split('\n')
 	fin_words=[]
 	for word in input:
 		word=word.lower()

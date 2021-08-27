@@ -70,9 +70,25 @@ let sub =  document.getElementById('submit');
       {
         p.textContent+= words[key]+" ";
       });
+
+      
+
   }
 
-  
+  function display_curr_word(word)
+  {
+      let p = document.querySelector(".curr_word_playing");
+      p.textContent=word;
+      p.style="color:Red; font-size:24px;font-decoration:bold;";
+  }
+
+  function display_err_message()
+  {
+   
+    let p = document.querySelector(".curr_word_playing");
+    p.textContent="Some error occurred (Probably Sigml file of the word/letter is not proper)";
+    p.style="color:Red; font-size:24px;font-decoration:bold;";
+  }
 function convert_json_to_arr(words)
 {
     wordArray=[];
@@ -95,12 +111,16 @@ function play_each_word2(){
       } else if(playerAvailableToPlay) {
               playerAvailableToPlay = false;
               startPlayer("SignFiles/" + wordArray[i]+".sigml");
+              display_curr_word(wordArray[i]);
               console.log("CURRENTLY PLAYING",wordArray[i]);
+              document.querySelector("#submit").disabled=true;
               i++;
-              playerAvailableToPlay=true;
+            //   playerAvailableToPlay=true;
           }
-         else if(playerAvailableToPlay==false){
-            let errtext = $(".statusExtra").val();
+         else {
+            let errtext = $(".statusExtra").val(); 
+            console.log("ERROR:- ", "Some error occurred (Probably Sigml file of the word/letter is not proper)");
+            display_err_message();
             if(errtext.indexOf("invalid") != -1) {
                 playerAvailableToPlay=true;
             }

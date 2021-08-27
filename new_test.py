@@ -252,7 +252,7 @@ def pre_process(text):
 def final_output(input):
 	final_string=""
 	valid_words=open("words.txt",'r').read();
-
+	valid_words=valid_words.split('\n')
 	fin_words=[]
 	for word in input:
 		word=word.lower()

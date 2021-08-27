@@ -37,7 +37,7 @@
         var tuavatarLoaded = false;
 
 
-        var avatarBusy = false;
+        var playerAvailableToPlay = true;
     </script>
 <!-- <script language="javascript" src="js/animationPlayer.js"></script> -->
 <style type="text/css">
@@ -101,7 +101,7 @@ function startPlayer(sigmlURL) {
                     
                     </tr><tr>
                     
-                    <td align="center">
+                    <td align="center" style="display: none;">
                     
                     <span class="CWASAAvMenu av0" ></span>
                     <input type="button" value="Sign" class="bttnPlaySiGMLURL av0" />
@@ -115,7 +115,10 @@ function startPlayer(sigmlURL) {
                     Gloss:
                     <input class="txtGloss av0" value="[none]" type="text">
                     </span>
-                    
+                    <span class="spanInfo av0">
+                        Status:
+                        <input type="text" class="statusExtra av0">
+                        </span>
                     <!--  CachedSiGML URL  -->
                     <input type="text" id="URLText" class="txtSiGMLURL av0 undisplayed" value="" />
                     
@@ -144,13 +147,11 @@ function startPlayer(sigmlURL) {
             <!-- <button class="btn-primary bttnPlaySiGMLURL av0">Submit</button> -->
             <!-- <input type="button" value="Sign" class="bttnPlaySiGMLURL av0" /> -->
         </div>
+        <div class="curr_playing">
+            Current Word :- <p class="curr_word_playing"></p>
+        </div>
         <div class="islOutput">
             ISL text: <p id ="isl_text"></p>
-            {{result}}
-            {{signres}}
-
-       
-
 
         </div>
         <div class="test_word_list">
