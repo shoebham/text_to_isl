@@ -16,16 +16,15 @@ function test_list()
          });
      });
 
-    
 }
 test_list();
 
-function setsigml(text)
-{
-    console.log(text);
-    setSiGMLURL(`SignFiles/${text}.sigml`);
-}
-
+// function setsigml(text)
+// {
+//     console.log(text);
+//     setSiGMLURL(`SignFiles/${text}.sigml`);
+// }
+var wordArray=[];
 $('a').click(function(event){
     event.preventDefault();
     //do whatever
@@ -50,7 +49,11 @@ let sub =  document.getElementById('submit');
           success: function(res)
           {
             //   console.log(res);
-              play_each_word(res);
+            // play_each_word(res);
+            ;
+            convert_json_to_arr(res);
+            play_each_word2();
+            display_isl_text(res);
           },
           error: function(xhr)
           {
@@ -59,17 +62,71 @@ let sub =  document.getElementById('submit');
       });
   });
 
+  function display_isl_text(words)
+  {
+      let p = document.getElementById("isl_text");
+      p.textContent="";
+      Object.keys(words).forEach(function(key) 
+      {
+        p.textContent+= words[key]+" ";
+      });
+  }
+
+  
+function convert_json_to_arr(words)
+{
+    wordArray=[];
+    console.log("wordArray",words);
+    Object.keys(words).forEach(function(key) {
+        wordArray.push(words[key]);
+    });
+    console.log("wordArray",wordArray);
+}
+function play_each_word2(){
+  totalWords = wordArray.length;
+  i = 0;
+  var int = setInterval(function () {
+      if(i == totalWords) {
+          if(playerAvailableToPlay) {
+              clearInterval(int);
+              finalHint = $("#inputText").val();
+              $("#textHint").html(finalHint);
+          }
+      } else {
+          if(playerAvailableToPlay) {
+              playerAvailableToPlay = false;
+              startPlayer("SignFiles/" + wordArray[i]+".sigml");
+              console.log("CURRENTLY PLAYING",wordArray[i]);
+              i++;
+          }
+      }
+  }, 1000);
+};
   function play_each_word(words){
+      
   Object.keys(words).forEach(function(key) {
                 console.log('Key : ' + key + ', Value : ' + words[key])
                 let word_to_play = words[key];
                 console.log("Playing ",word_to_play);
                 setSiGMLURL(`SignFiles/${word_to_play}.sigml`);    
+                document.querySelector('.bttnPlaySiGMLURL').click();         
   });
 }
 
+var loadingTout = setInterval(function() {
+    if(tuavatarLoaded) {
+        // $("#loading").hide();
+        clearInterval(loadingTout);
+        console.log("Avatar loaded successfully !");
+    }
+}, 1000);
 
-
+// function getstat (e)
+// {
+//     console.log(e);
+// }
+// console.log(CWASA.callHook('animactive'));
+// console.log(avatarBusy);
 // let form =  document.getElementById('form');
 //   form.addEventListener('submit', function(event) {
 //     event.preventDefault();    // prevent page from refreshing
