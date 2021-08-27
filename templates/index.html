@@ -74,8 +74,9 @@ function startPlayer(sigmlURL) {
 	sigmlURL = setSiGMLURL(sigmlURL);
 	console.log("URL "+sigmlURL);
     // Equivalent to click on Sign button
- 
+    CWASA.getLogger("myLog","warn");
 	CWASA.playSiGMLURL(sigmlURL);
+    CWASA.getLogger("myLog","warn");
   
 }
 </script>
@@ -121,7 +122,7 @@ function startPlayer(sigmlURL) {
                     <script language="javascript">
                     // Set default sign
                     console.log("here");
-                    setSiGMLURL("SignFiles/hello.sigml");
+                    setSiGMLURL("SignFiles/B.sigml");
                     
                     </script>
                     

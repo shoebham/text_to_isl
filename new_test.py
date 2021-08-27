@@ -276,8 +276,13 @@ def convert_to_final():
 def take_input(text):
 	test_input=text.strip().replace("\n","").replace("\t","")
 	test_input2=""
-	for word in test_input.split("."):
-		test_input2+= word.capitalize()+".";
+	if(len(test_input)==1):
+		test_input2=test_input;
+	else:
+		for word in test_input.split("."):
+			test_input2+= word.capitalize()+".";
+
+
 	some_text= en_nlp(test_input2);
 	convert(some_text);
 

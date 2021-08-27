@@ -92,14 +92,19 @@ function play_each_word2(){
               finalHint = $("#inputText").val();
               $("#textHint").html(finalHint);
           }
-      } else {
-          if(playerAvailableToPlay) {
+      } else if(playerAvailableToPlay) {
               playerAvailableToPlay = false;
               startPlayer("SignFiles/" + wordArray[i]+".sigml");
               console.log("CURRENTLY PLAYING",wordArray[i]);
               i++;
+              playerAvailableToPlay=true;
           }
-      }
+         else if(playerAvailableToPlay==false){
+            let errtext = $(".statusExtra").val();
+            if(errtext.indexOf("invalid") != -1) {
+                playerAvailableToPlay=true;
+            }
+         }
   }, 1000);
 };
   function play_each_word(words){
@@ -119,7 +124,7 @@ var loadingTout = setInterval(function() {
         clearInterval(loadingTout);
         console.log("Avatar loaded successfully !");
     }
-}, 1000);
+}, 1500);
 
 // function getstat (e)
 // {
