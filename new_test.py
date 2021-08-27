@@ -319,7 +319,7 @@ def clear_all():
 
 
 final_words_dict = {};
-@app.route('/')
+@app.route('/',methods=['GET'])
 def index():
 	clear_all();
 	return render_template('index.html')
@@ -339,7 +339,8 @@ def flask_test():
 			final_words_dict[i]=word;
 	print("---------------Final words dict--------------");
 	print(final_words_dict)
-	return render_template('index.html',result = final_words,signres=final_words_dict)
+	return final_words_dict;
+	# return render_template('index.html',result = final_words,signres=final_words_dict)
 
 
 @app.route('/static/<path:path>')

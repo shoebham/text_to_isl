@@ -132,7 +132,7 @@ function startPlayer(sigmlURL) {
         <div class="englishInput">
             <form method="POST" id= 'form'>
                 Input:<input id="text" type="text" name="text" autocomplete="off">
-                <button id = "submit"  onclick="play_each_word()">Submit</button>
+                <button id = "submit"  >Submit</button>
                 </form>
             <!-- <button class="btn-primary bttnPlaySiGMLURL av0">Submit</button> -->
             <!-- <input type="button" value="Sign" class="bttnPlaySiGMLURL av0" /> -->
@@ -160,29 +160,91 @@ function startPlayer(sigmlURL) {
     <script type="text/javascript" src="{{ url_for('static', filename='js/player.js') }}"></script>
     <script>
         // console.log("{{signres}}")
-        var words = JSON.parse('{{ signres | tojson | safe}}');
         // words = words);
         // console.log(JSON.stringify(b));
         // console.log(JSON.stringify(words));
-        $(document).ready(play_each_word());
-        function play_each_word()
-        {
-            // for(var i=1;i<=words.length;i++)
-            // {
-            //     console.log(`playing word${i}`);
-                // console.log(words[i-1]);
-                // let word_to_play  = words[i-1].i;
-                // console.log(word_to_play);
-           Object.keys(words).forEach(function(key) {
-                console.log('Key : ' + key + ', Value : ' + words[key])
-                let word_to_play = words[key];
-                console.log("Playing ",word_to_play);
-                setSiGMLURL(`SignFiles/${word_to_play}.sigml`);    
-                $('.av0').click();
-               
-        });
 
-    }       
+    //     function play_each_word()
+    //     {
+    //         // for(var i=1;i<=words.length;i++)
+    //         // {
+    //         //     console.log(`playing word${i}`);
+    //             // console.log(words[i-1]);
+    //             // let word_to_play  = words[i-1].i;
+    //             // console.log(word_to_play);
+    //        Object.keys(words).forEach(function(key) {
+    //             console.log('Key : ' + key + ', Value : ' + words[key])
+    //             let word_to_play = words[key];
+    //             console.log("Playing ",word_to_play);
+    //             setSiGMLURL(`SignFiles/${word_to_play}.sigml`);    
+    //             $('.av0').click();
+
+                
+    //     });
+
+    // //     if(data.length > 0) {
+    // //   var playtimeout = setInterval(function() {
+
+    // //       if(playseq.length == 0 || data.length == 0) {
+    // //         clearInterval(playtimeout);
+    // //         console.log("Clear play interval");
+    // //         avatarbusy=false;
+    // //         return;
+    //       }
+
+//           if(avatarbusy == false) {
+//             avatarbusy = true; // this is set to flase in allcsa.js      
+
+//             word2play = playseq.shift();    
+//             weblog("Playing sign :" + word2play);
+//             if(lookup[word2play]==null) {
+//               weblog("<span style='color:red;'>SiGML not available for word : " + word2play + "</span>");
+//               avatarbusy=false;
+
+
+//             } else {
+//               data2play = lookup[word2play];
+//               console.log(data2play);
+//               $("#currentWord").text(word2play);
+//               $(".txtaSiGMLText").val(data2play);
+//               $(".bttnPlaySiGMLText").click();
+//             }
+//           } else {
+//             console.log("Avatar is still busy");
+
+//             // check if error occured then reset the avatar to free
+//             errtext = $(".statusExtra").val();
+//             if(errtext.indexOf("invalid") != -1) {
+//               weblog("<span style='color:red;'>Error: " + errtext + "</span>");
+//               avatarbusy = false;
+//             }
+//           }
+//       }, 500);
+//     }
+
+//   });
+
+// });
+
+                // setSiGMLURL(`SignFiles/${word_to_play}.sigml`);
+                // $('.bttnPlaySiGMLURL').click();
+            // }
+        // }
+        // function delay() {
+        //     setTimeout(function() {
+        //       play_each_word();
+        //     }, 3000);
+        //     }
+
+        //     if (document.readyState == 'complete') {
+        //         delay();
+        //     } else {
+        //         document.onreadystatechange = function () {
+        //             if (document.readyState === "complete") {
+        //                 delay();
+        //             }
+        //         }
+        //     }            
         </script>
         <!-- <script type="text/javascript" src="js/sigmlFiles.json"></script> -->
         <!-- <script type="text/javascript" src="js/handler.js"></script> -->

@@ -30,6 +30,59 @@ $('a').click(function(event){
     event.preventDefault();
     //do whatever
   });
+
+  let form =  document.getElementById('form');
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+});
+
+let sub =  document.getElementById('submit');
+  sub.addEventListener('click',()=>
+  {
+    //   sub.preventDefault();
+    let input =  document.getElementById('text').value;
+    console.log("INPUT is ",input);
+
+      $.ajax({
+          url:'/',
+          type:'POST',
+          data:{text:input},
+          success: function(res)
+          {
+            //   console.log(res);
+              play_each_word(res);
+          },
+          error: function(xhr)
+          {
+            console.log(xhr);
+          }
+      });
+  });
+
+  function play_each_word(words){
+  Object.keys(words).forEach(function(key) {
+                console.log('Key : ' + key + ', Value : ' + words[key])
+                let word_to_play = words[key];
+                console.log("Playing ",word_to_play);
+                setSiGMLURL(`SignFiles/${word_to_play}.sigml`);    
+  });
+}
+
+
+
+// let form =  document.getElementById('form');
+//   form.addEventListener('submit', function(event) {
+//     event.preventDefault();    // prevent page from refreshing
+//     const formData = new FormData(form);  // grab the data inside the form fields
+//     fetch('/', {   // assuming the backend is hosted on the same server
+//         method: 'POST',
+//         body: formData,
+//     }).then(function(response) {
+//         console.log("LOOK HERE",response);
+//         // do something with the response if needed.
+//         // If you want the table to be built only after the backend handles the request and replies, call buildTable() here.
+//     });
+// });
 // write a function for factorial
 
 //   let form = document.getElementById('form');
