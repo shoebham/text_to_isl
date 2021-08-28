@@ -19,7 +19,7 @@ import pprint
 
 
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
-print(BASE_DIR)
+# print(BASE_DIR)
 
 
 # Download zip file from https://nlp.stanford.edu/software/stanford-parser-full-2015-04-20.zip and extract in stanford-parser-full-2015-04-20 folder in higher directory
@@ -31,33 +31,13 @@ os.environ['NLTK_DATA'] = '/usr/local/share/nltk_data/'
 
 
 
-
+# Pipeline for stanza (calls spacy for tokenizer)
 en_nlp = stanza.Pipeline('en',processors={'tokenize':'spacy'})	
 # print(stopwords.words('english'))
 
 # stop words that are not to be included in ISL
 stop_words = set(["am","are","is","was","were","be","being","been","have","has","had",
 					"does","did","could","should","would","can","shall","will","may","might","must","let"]);
-
-# test_input='''
-# 					How are you.
-# 					Chris\'s car was towed.
-# 					I can go there.
-# 					I have not had breakfast yet.
-# 					That is something.
-# 					I am stronger than him.
-# 					I am the strongest.
-# 					I love cats and dogs.
-# 					I live in India.
-# 					My flight was called off.
-# 					this is a test sentence.
-# 					'''.strip().replace("\n","").replace("\t","")
-# test_input2=""
-# for word in test_input.split("."):
-# 	test_input2+= word.capitalize()+".";
-# some_text= en_nlp(test_input2);
-
-
 
 
 
@@ -68,11 +48,13 @@ sent_list_detailed=[];
 
 # word array
 word_list=[];
-# word array with details provided by stanza
+
+# word array with details provided by stanza 
 word_list_detailed=[];
 
+# converts to detailed list of sentences ex. {"text":"word","lemma":""}
 def convert_to_sentence_list(text):
-	print("text here is ",text)
+	# print("text here is ",text)
 	for sentence in text.sentences:
 		sent_list.append(sentence.text)
 		sent_list_detailed.append(sentence)
@@ -159,6 +141,8 @@ def label_parse_subtrees(parent_tree):
     return tree_traversal_flag
 
 
+
+# handles if noun is in the tree
 def handle_noun_clause(i, tree_traversal_flag, modified_parse_tree, sub_tree):
     # if clause is Noun clause and not traversed then insert them in new tree first
     if tree_traversal_flag[sub_tree.treeposition()] == 0 and tree_traversal_flag[sub_tree.parent().treeposition()] == 0:
@@ -168,6 +152,7 @@ def handle_noun_clause(i, tree_traversal_flag, modified_parse_tree, sub_tree):
     return i, modified_parse_tree
 
 
+# handles if verb/proposition is in the tree followed by nouns
 def handle_verb_prop_clause(i, tree_traversal_flag, modified_parse_tree, sub_tree):
     # if clause is Verb clause or Proportion clause recursively check for Noun clause
     for child_sub_tree in sub_tree.subtrees():
@@ -179,6 +164,7 @@ def handle_verb_prop_clause(i, tree_traversal_flag, modified_parse_tree, sub_tre
     return i, modified_parse_tree
 
 
+# modifies the tree according to POS
 def modify_tree_structure(parent_tree):
     # Mark all subtrees position as 0
     tree_traversal_flag = label_parse_subtrees(parent_tree)
@@ -202,9 +188,10 @@ def modify_tree_structure(parent_tree):
 
     return modified_parse_tree
 
-
+# converts the text in parse trees
 def reorder_eng_to_isl(input_string):
 
+	# check if all the words entered are alphabets.
 	count=0
 	for word in input_string:
 		if(len(word)==1):
@@ -212,17 +199,7 @@ def reorder_eng_to_isl(input_string):
 
 	if(count==len(input_string)):
 		return input_string;
-	# flag=False;
-	# for word in input_string:
-	# 	if (len(word)==1):
-	# 		flag=True;
-	# 	else:
-	# 		flag=False;
-	# 	if(flag):
-	# 		return input_string;
-	# if len(input_string) is 1:
-	# 	return input_string
-
+	
 	parser = StanfordParser()
 	# Generates all possible parse trees sort by probability for the sentence
 	possible_parse_tree_list = [tree for tree in parser.parse(input_string)]
@@ -238,32 +215,20 @@ def reorder_eng_to_isl(input_string):
 	return parsed_sent
 
 
+# final word list
 final_words= [];
+# final word list that is detailed(dict)
 final_words_detailed=[];
 
 
 # pre processing text
 def pre_process(text):
-	 #converts sentences to words
-	# print(sent_list_detailed)
-	# global final_words;
 	remove_punct(word_list)
 	final_words.extend(filter_words(word_list));
 	lemmatize(final_words)
 
-# print("--------------------Sent List------------------------");
-# pprint.pprint(sent_list)
-# # print("--------------------Word List Detailed------------------------");
-# # print("word_list_detailed",word_list_detailed)
-# # print("--------------------Sent List Detailed------------------------");
-# # print("sent_list_detailed",sent_list_detailed)
-# print("final_words");
-# pprint.pprint(final_words);
 
-
-
-
-
+# checks if sigml file exists of the word if not use letters for the words
 def final_output(input):
 	final_string=""
 	valid_words=open("words.txt",'r').read();
@@ -282,12 +247,14 @@ def final_output(input):
 
 final_output_in_sent=[];
 
+# converts the final list of words in a final list with letters seperated if needed
 def convert_to_final():
 	for words in final_words:
 		final_output_in_sent.append(final_output(words));
 
 
 
+# takes input from the user
 def take_input(text):
 	test_input=text.strip().replace("\n","").replace("\t","")
 	test_input2=""
@@ -297,7 +264,7 @@ def take_input(text):
 		for word in test_input.split("."):
 			test_input2+= word.capitalize()+" .";
 
-
+	# pass the text through stanza
 	some_text= en_nlp(test_input2);
 	convert(some_text);
 
@@ -308,11 +275,8 @@ def convert(some_text):
 
 	# reorders the words in input
 	for i,words in enumerate(word_list):
-		# print(words)
-		# print(reorder_eng_to_isl(words))
 		word_list[i]=reorder_eng_to_isl(words)
-		# for word in words:
-	# 		print("".join(word))
+
 	# removes punctuation and lemmatizes words
 	pre_process(some_text);
 	convert_to_final();
@@ -328,6 +292,7 @@ def print_lists():
 	print("---------------Final sentence with letters--------------");
 	pprint.pprint(final_output_in_sent)
 
+# clears all the list after completing the work
 def clear_all():
 	sent_list.clear();
 	sent_list_detailed.clear();
@@ -339,7 +304,9 @@ def clear_all():
 	final_words_dict.clear();
 
 
+# dict for sending data to front end in json
 final_words_dict = {};
+
 @app.route('/',methods=['GET'])
 def index():
 	clear_all();
@@ -348,28 +315,27 @@ def index():
 
 @app.route('/',methods=['GET','POST'])
 def flask_test():
-	clear_all()
-	text = request.form.get('text')
+	clear_all();
+	text = request.form.get('text') #gets the text data from input field of front end
 	print("text is", text)
 	take_input(text)
-	# result = [{"text1":"testing/////////......."}];
-	# clear_all()
-	# final_output_in_json = {'isl_text_with_letters':final_output_in_sent}
+
+	# fills the json 
 	for words in final_output_in_sent:
 		for i,word in enumerate(words,start=1):
 			final_words_dict[i]=word;
+
 	print("---------------Final words dict--------------");
 	print(final_words_dict)
+
 	return final_words_dict;
-	# return render_template('index.html',result = final_words,signres=final_words_dict)
 
 
+# serve sigml files for animation
 @app.route('/static/<path:path>')
 def serve_signfiles(path):
 	print("here");
 	return send_from_directory('static',path)
-
-# my_form();
 
 
 if __name__=="__main__":
