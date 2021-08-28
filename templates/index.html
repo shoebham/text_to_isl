@@ -9,9 +9,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link rel='stylesheet' type='text/css' media='screen' href="{{url_for('static',filename='style.css')}}">
 
-    <!-- <link rel="stylesheet" href="http://vhg.cmp.uea.ac.uk/tech/jas/vhg2021/cwa/cwasa.css" />
-    <script type="text/javascript" src="http://vhg.cmp.uea.ac.uk/tech/jas/vhg2021/cwa/allcsa.js"></script> -->
-
     <link rel="stylesheet" href="http://vhg.cmp.uea.ac.uk/tech/jas/vhg2021/cwa/cwasa.css" />
     <!-- <script type="text/javascript" src="http://vhg.cmp.uea.ac.uk/tech/jas/vhg2021/cwa/allcsa.js"></script> -->
 
@@ -51,11 +48,13 @@
 <body onload="CWASA.init(initCfg);">
     <script language="javascript">
 
-console.log("hello");
+// console.log("hello");
+
 function playText(stext) {
 	CWASA.playSiGMLText(stext);
 }
 
+// sets url for sigml
 function setSiGMLURL(sigmlURL) {
 	console.log("hello");
 	var loc = window.location.href;
@@ -63,13 +62,12 @@ function setSiGMLURL(sigmlURL) {
 	// console.log("SiGML: "+sigmlURL);
 	// console.log("Location Dir: "+locDir);
 	sigmlURL = locDir + "/" + sigmlURL;
-    console.log("here");
-	
+    // console.log("here");
 	console.log("URL "+sigmlURL);
 	document.getElementById("URLText").value = sigmlURL;
 	return sigmlURL;
 }
-
+// starts the player animation
 function startPlayer(sigmlURL) {
 	sigmlURL = setSiGMLURL(sigmlURL);
 	console.log("URL "+sigmlURL);
@@ -81,6 +79,7 @@ function startPlayer(sigmlURL) {
 </script>
 <div class="main">
     <div class="container">
+        <!-- animation player frame -->
         <div class="player card" >
             <a id="player"></a>
             <div class="anim"> 
@@ -123,7 +122,7 @@ function startPlayer(sigmlURL) {
                     
                     <script language="javascript">
                     // Set default sign
-                    console.log("here");
+                    // console.log("here");
                     setSiGMLURL("SignFiles/B.sigml");
                     
                     </script>
@@ -138,6 +137,7 @@ function startPlayer(sigmlURL) {
             </div>
             
         </div>
+        <!-- input for text -->
         <div class="englishInput">
             <form method="POST" id= 'form'>
                 Input:<input id="text" type="text" name="text" autocomplete="off">
