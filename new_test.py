@@ -17,16 +17,73 @@ import stanza
 from stanza.server import CoreNLPClient
 import pprint 
 
-
+# These few lines are important
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
-# print(BASE_DIR)
 
-
-# Download zip file from https://nlp.stanford.edu/software/stanford-parser-full-2015-04-20.zip and extract in stanford-parser-full-2015-04-20 folder in higher directory
+# Download zip file from https://nlp.stanford.edu/software/stanford-parser-full-2018-10-17.zip and extract in stanford-parser-full-2015-04-20 folder in higher directory
 os.environ['CLASSPATH'] = os.path.join(BASE_DIR, 'stanford-parser-full-2018-10-17')
 os.environ['STANFORD_MODELS'] = os.path.join(BASE_DIR,
                                              'stanford-parser-full-2018-10-17/edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz')
 os.environ['NLTK_DATA'] = '/usr/local/share/nltk_data/'
+
+
+# checks if jar file of stanford parser is present or not
+def is_parser_jar_file_present():
+    stanford_parser_zip_file_path = os.environ.get('CLASSPATH') + ".jar"
+    return os.path.exists(stanford_parser_zip_file_path)
+
+
+def reporthook(count, block_size, total_size):
+    global start_time
+    if count == 0:
+        start_time = time.perf_counter()
+        return
+    duration = time.perf_counter() - start_time
+    progress_size = int(count * block_size)
+    speed = int(progress_size / (1024 * duration))
+    percent = min(int(count*block_size*100/total_size),100)
+    sys.stdout.write("\r...%d%%, %d MB, %d KB/s, %d seconds passed" %
+                    (percent, progress_size / (1024 * 1024), speed, duration))
+    sys.stdout.flush()
+
+# downloads stanford parser
+def download_parser_jar_file():
+    stanford_parser_zip_file_path = os.environ.get('CLASSPATH') + ".jar"
+    url = "https://nlp.stanford.edu/software/stanford-parser-full-2018-10-17.zip"
+    urllib.request.urlretrieve(url, stanford_parser_zip_file_path, reporthook)
+
+# extracts stanford parser
+def extract_parser_jar_file():
+    stanford_parser_zip_file_path = os.environ.get('CLASSPATH') + ".jar"
+    try:
+        with zipfile.ZipFile(stanford_parser_zip_file_path) as z:
+            z.extractall(path=BASE_DIR)
+    except Exception:
+        os.remove(stanford_parser_zip_file_path)
+        download_parser_jar_file()
+        extract_parser_jar_file()
+
+# extracts models of stanford parser
+def extract_models_jar_file():
+    stanford_models_zip_file_path = os.path.join(os.environ.get('CLASSPATH'), 'stanford-parser-3.9.2-models.jar')
+    stanford_models_dir = os.environ.get('CLASSPATH')
+    with zipfile.ZipFile(stanford_models_zip_file_path) as z:
+        z.extractall(path=stanford_models_dir)
+
+
+# checks jar file and downloads if not present 
+def download_required_packages():
+    if not os.path.exists(os.environ.get('CLASSPATH')):
+        if is_parser_jar_file_present():
+           pass
+        else:
+            download_parser_jar_file()
+        extract_parser_jar_file()
+
+    if not os.path.exists(os.environ.get('STANFORD_MODELS')):
+        extract_models_jar_file()
+
+
 
 
 
@@ -54,7 +111,6 @@ word_list_detailed=[];
 
 # converts to detailed list of sentences ex. {"text":"word","lemma":""}
 def convert_to_sentence_list(text):
-	# print("text here is ",text)
 	for sentence in text.sentences:
 		sent_list.append(sentence.text)
 		sent_list_detailed.append(sentence)
@@ -84,20 +140,13 @@ def filter_words(word_list):
 		for word in words:
 			if word not in stop_words:
 				temp_list.append(word);
-			# print("temp_list",temp_list)
 		final_words.append(temp_list.copy());
-	# print("here");
 	# removes stop words from word_list_detailed 
 	for words in word_list_detailed:
-		# print("words",words)
 		for i,word in enumerate(words):
-			# print(word.upos)
-			# print("i:",i,"word",word)
-			# print(words[i].upos)
 			if(words[i].text in stop_words):
 				del words[i];
 				break;
-			# word_list_detailed[:] = [x for x in word if x.upos !='PUNCT']
 	
 	return final_words;
 # 
@@ -105,21 +154,12 @@ def filter_words(word_list):
 # removes punctutation 
 def remove_punct(word_list):
 	# removes punctutation from word_list_detailed
-	# print("list",word_list_detailed)
 	for words,words_detailed in zip(word_list,word_list_detailed):
 		for i,(word,word_detailed) in enumerate(zip(words,words_detailed)):
-			# print("word",word,"word_detailed",word_detailed,"i",i);
-			# print("word with array ",words_detailed[i]);
-		# 	# print(word.upos)
-		# 	# print("i:",i,"word",word)
-		# 	# print(words[i].upos)
 			if(word_detailed.upos=='PUNCT'):
 				del words_detailed[i];
 				words.remove(word_detailed.text);
 				break;
-			# word_list_detailed[:] = [x for x in word if x.upos !='PUNCT']
-	# print("after removing",word_list_detailed);
-	# print("after removing",word_list);
 
 
 # lemmatizes words
@@ -128,7 +168,7 @@ def lemmatize(final_word_list):
 		for i,(word,fin) in enumerate(zip(words,final)):
 			if fin in word.text:
 				final[i]=word.lemma;
-				# print("here",word.lemma)
+				
 	
 	for word in final_word_list:
 		print("final_words",word);
@@ -190,7 +230,7 @@ def modify_tree_structure(parent_tree):
 
 # converts the text in parse trees
 def reorder_eng_to_isl(input_string):
-
+	download_required_packages();
 	# check if all the words entered are alphabets.
 	count=0
 	for word in input_string:
