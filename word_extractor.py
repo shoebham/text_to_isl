@@ -2,7 +2,7 @@ import re
 import os
 
 
-files = os.listdir('./ui/signfiles');
+files = os.listdir('./static/signfiles');
 word=re.compile(r'[^\/]+(?=\.)');
 words_file = open("words.txt",'w')
 
