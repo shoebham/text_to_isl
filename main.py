@@ -2,7 +2,7 @@ import json
 import os
 from nltk.parse import stanford
 import stanza 
-stanza.install_corenlp()
+# stanza.install_corenlp()
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
 from nltk.tokenize import sent_tokenize
@@ -359,6 +359,8 @@ def flask_test():
 	clear_all();
 	text = request.form.get('text') #gets the text data from input field of front end
 	print("text is", text)
+	if(text==""):
+		return "";
 	take_input(text)
 
 	# fills the json 

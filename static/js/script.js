@@ -1,5 +1,18 @@
+// prevents the user from entering bad characters in input that could break the python code :(
+$('input').on('keypress', function (e) {
+  if(e.keyCode==13){return true};
+  if (e.which < 48 && e.which!=32|| 
+    (e.which > 57 && e.which < 65) || 
+    (e.which > 90 && e.which < 97) ||
+    e.which > 122) {
+    e.preventDefault();
+}
+// console.log(e.keyCode)
+});
 
+var wordArrayJson=[];
 // makes a li for available words in signFiles
+
 function test_list()
 {
     
@@ -10,6 +23,9 @@ function test_list()
      {
          data.forEach((e)=>
          {
+            // let word = e.name;
+            let tempjson = {word:e.name};
+            wordArrayJson.push(tempjson);
              let li=document.createElement("li");
             //  li.appendChild(document.createTextNode(e.name));
             li.innerHTML=`<a href="#player" onclick="setSiGMLURL('SignFiles/${e.name}.sigml');" > ${e.name}</a>`
@@ -70,9 +86,6 @@ function display_isl_text(words)
       {
         p.textContent+= words[key]+" ";
       });
-
-      
-
   }
 // displays currently playing word/letter
   function display_curr_word(word)
