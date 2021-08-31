@@ -168,7 +168,10 @@ def lemmatize(final_word_list):
 	for words,final in zip(word_list_detailed,final_word_list):
 		for i,(word,fin) in enumerate(zip(words,final)):
 			if fin in word.text:
-				final[i]=word.lemma;
+				if(len(fin)==1):
+					final[i]=fin;
+				else:
+					final[i]=word.lemma;
 				
 	
 	for word in final_word_list:

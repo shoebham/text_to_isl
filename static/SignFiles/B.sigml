@@ -1,24 +1,27 @@
 <sigml>
 <hns_sign gloss="b">
-	<hamnosys_nonmanual>
-	</hamnosys_nonmanual>
-	<hamnosys_manual>
-		<hamsymmlr/>
-		<hampinchopen/>
-		<hamextfingeru/>
-		<hampalml/>
-		<hamparbegin/>
-		<hamfingertip/>
-		<hamthumb/>
-		<hamindexfinger/>
-		<hamplus/>
-		<hamfingertip/>
-		<hamthumb/>
-		<hamindexfinger/>
-		<hamparend/>
-		<hamtouch/>
-		<hamchest/>
-		<hamclose/>
-	</hamnosys_manual>
-</hns_sign>
-</sigml>
+<hamnosys_nonmanual>
+</hamnosys_nonmanual>
+<hamnosys_manual>
+<hamparbegin/>
+<hampinchall/>
+<hamplus/>
+<hampinchall/>
+<hamparend/>
+<hamparbegin/>
+<hamextfingeru/>
+<hampalml/>
+<hamplus/>
+<hamextfingeru/>
+<hampalmr/>
+<hamparend/>
+<hamparbegin/>
+<hamindexfinger/
+><hamfingernail/>
+<hamhandback/>
+<hamplus/>
+<hamindexfinger/>
+<hamfingernail/>
+<hamhandback/>
+<hamparend/><hamtouch/><hamneck/><hamclose/></hamnosys_manual></hns_sign></sigml>
+
