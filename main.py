@@ -1,15 +1,21 @@
 import json
 import os
-from nltk.parse import stanford
+# from nltk.parse import stanford
 import stanza 
 # stanza.install_corenlp()
-from nltk.stem import WordNetLemmatizer
-from nltk.tokenize import word_tokenize
-from nltk.tokenize import sent_tokenize
-from nltk.corpus import stopwords
+# from nltk.stem import WordNetLemmatizer
+# from nltk.tokenize import word_tokenize
+# from nltk.tokenize import sent_tokenize
+# from nltk.corpus import stopwords
 from nltk.parse.stanford import StanfordParser
 from nltk.tree import *
+from six.moves import urllib
+import zipfile
+import sys
+import time
+import ssl
 
+ssl._create_default_https_context = ssl._create_unverified_context
 from flask import Flask,request,render_template,send_from_directory,jsonify
 
 app =Flask(__name__,static_folder='static', static_url_path='')

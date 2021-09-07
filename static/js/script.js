@@ -128,6 +128,10 @@ function play_each_word(){
               $("#textHint").html(finalHint);
               document.querySelector("#submit").disabled=false;
           }
+          else{
+            display_err_message();
+            document.querySelector("#submit").disabled=false;
+          }
       } else if(playerAvailableToPlay) {
               playerAvailableToPlay = false;
               startPlayer("SignFiles/" + wordArray[i]+".sigml");
