@@ -1,0 +1,40 @@
+{
+  "description"     : "========  CWASA installation configuration data : Development release ========",
+
+  "jasBase"         : "http://localhost/jas/loc2021/",
+  "jasVersionTag"   : "loc2021",
+
+  "sigmlBase"       : "sigml",
+  "avJARBase"       : "avatars",
+  "avJSONBase"      : "avjson",
+  "useAvatarJARs"   : true,
+
+  "animgenFPS"      : 30,
+
+  "avs" : [
+    "anna", "marc", "francoise"
+  ],
+
+  "avsfull" : [
+    "anna", "marc", "francoise",
+    "luna", "siggi",
+    "robotboy", "beatrice", "genie",
+    "otis", "darshan", "candy",
+    "max", "carmen", "monkey", "dino", "dinoex", "dinototo", "bahia"
+  ],
+
+  "avSettings" : [
+    {
+      "description":      "Default if client configuration is missing or restricted",
+      "width":            384,
+      "height":           320,
+      "avList":           "avs",
+      "initAv":           "anna",
+      "initCamera":       [ 0, 0.23, 3.24, 5, 18, 30, -1, -1 ],
+      "allowFrameSteps":  true,
+      "initSiGMLURL":     "iTakeMug.sigml",
+      "allowSiGMLText":   true
+    }
+  ]
+}
+

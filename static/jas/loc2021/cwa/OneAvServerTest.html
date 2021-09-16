@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>CoffeeScript WebGL ARP Signing Avatar: loc.2021</title>
+
+<meta http-equiv="Access-Control-Allow-Origin" content="*">
+<meta http-equiv="Access-Control-Allow-Methods" content="GET">
+
+<!-- CWA @ vhg.cmp.uea.ac.uk/jrwg/ -->
+<link rel="stylesheet"
+    href="http://localhost/jas/loc2021/cwa/cwasa.css" />
+<script type="text/javascript"
+    src="http://localhost/jas/loc2021/cwa/allcsa.js"></script>
+
+<script language="javascript">
+
+function playURL(surl) {
+	CWASA.playSiGMLURL(surl);
+}
+
+function playText(stext) {
+	CWASA.playSiGMLText(stext);
+}
+
+function addStatus(evt) {
+	var elt = document.getElementById("myStatusLog");
+	var msg = evt.msg;
+	if (evt.av != "*") {
+		msg = "[av" + evt.av + "] " + msg;
+	}
+	elt.value = elt.value + msg + "\n";
+}
+
+CWASA.addHook("status", addStatus);
+
+function writeJSON(evt) {
+	var elt = document.getElementById("JSONText");
+	if (elt) elt.value = evt.msg;
+}
+
+CWASA.addHook("json", writeJSON);
+
+var lggr = CWASA.getLogger("CWASA", "trace");
+
+</script>
+
+</head>
+
+<body onload="CWASA.init({animgenServer:'http://vhg.cmp.uea.ac.uk/cgi-bin/animgen/animgenserver.pl',useClientConfig:true});">
+
+<!--================================================================-->
+<h3>CoffeeScript WebGL ARP Signing Avatar with Animgen via JASigning: loc.2021</h3>
+<h4>Test direct access to CWASA with Animgen Server: http://vhg.cmp.uea.ac.uk/cgi-bin/animgen/animgenserver.pl</h4>
+<hr/>
+
+<!-- CWA signing avatar panel 0 -->
+<!--================================================================-->
+<div class="CWASAPanel av0" align="center" ></div>
+<!--================================================================-->
+<hr/>
+
+<!-- CWA signing avatar panel 1 -->
+<!--================================================================-->
+<!--div class="CWASAPanel av1" align="center" ></div-->
+<!--================================================================-->
+<!--hr-->
+<div align="center">
+New Text: <input type="button" value="doText" onclick='playText(document.getElementById("mySiGML").value);' /><br>
+<textarea id="mySiGML" class="txtaSiGMLText" rows="6" >
+<?xml version="1.0" encoding="utf-8"?>
+<sigml>
+
+<hns_sign gloss="mug">
+  <hamnosys_nonmanual>
+    <hnm_mouthpicture picture="mVg"/>
+  </hamnosys_nonmanual>
+  <hamnosys_manual>
+    <hamfist/> <hamthumbacrossmod/>
+        <hamextfingerol/> <hampalml/>
+    <hamshoulders/>
+    <hamparbegin/> <hammoveu/> <hamarcu/>
+        <hamreplace/> <hamextfingerul/> <hampalmdl/>
+    <hamparend/>
+  </hamnosys_manual>
+</hns_sign>
+
+<hns_sign gloss="take">
+  <hamnosys_nonmanual>
+    <hnm_mouthpicture picture="te_Ik"/>
+  </hamnosys_nonmanual>
+  <hamnosys_manual>
+    <hamceeall/> <hamextfingerol/> <hampalml/>
+    <hamlrbeside/> <hamshoulders/> <hamarmextended/>
+    <hamreplace/> <hamextfingerl/> <hampalml/>
+    <hamchest/> <hamclose/>
+  </hamnosys_manual>
+</hns_sign>
+
+<hns_sign gloss="i">
+  <hamnosys_nonmanual>
+    <hnm_mouthpicture picture="a_I"/>
+  </hamnosys_nonmanual>
+  <hamnosys_manual>
+    <hamfinger2/> <hamthumbacrossmod/>
+    <hamextfingeril/> <hampalmr/>
+    <hamchest/> <hamtouch/>
+  </hamnosys_manual>
+</hns_sign>
+
+</sigml>
+</textarea>
+
+<br>
+New URL:  <input type="button" value="doURL" onclick='playURL(document.getElementById("myURL").value);' /><br>
+<input id="myURL" class="txtSiGMLURL av0" value="welkom-ngt.sigml" type="text" />
+
+<br>
+<input type="button" value="Stop" onclick='CWASA.stopSiGML();' />
+
+<hr/>
+<textarea id="myStatusLog"  class="statusLog" rows="6" >
+</textarea>
+<hr/>
+<textarea id="JSONText" class="txtaSiGMLText" rows="6" >
+
+</textarea>
+
+</div>
+
+<!-- SToCA applet element panel -->
+<!--================================================================-->
+<div class="SToCA" align="center" ></div>
+<!--================================================================-->
+
+<hr/>
+<p>
+<small>
+Available under the
+<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons BY-NC-ND License</a>. JRWG 2021-01-19
+</small>
+
+</body>
+</html>

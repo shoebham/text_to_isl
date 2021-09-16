@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp codebase="http://localhost/jas/loc2021/"
+    href="jnlp/antlr.jnlp">
+
+  <information>
+    <title>ANTLR for JASigning</title>
+    <vendor>JASigning loc.2021</vendor>
+    <description>ANTLR Runtime v2.7.7 for JASigning</description>
+    <offline-allowed />
+  </information>
+
+  <security>  <all-permissions />  </security>
+
+  <update check="always" policy="always" />
+
+  <resources>
+    <jar href="jars/antlr-3.5.2-complete.jar" />
+  </resources>
+
+  <component-desc />
+</jnlp>

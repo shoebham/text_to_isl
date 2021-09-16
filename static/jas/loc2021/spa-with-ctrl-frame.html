@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>SiGML Player Applet without GUI Frame Frameset</title>
+
+<script type="text/javascript" src="scripts/spa-params.js"></script>
+<script type="text/javascript" src="scripts/spa-host-for-ctrl.js"></script>
+<script type="text/javascript" src="scripts/spa-ctrl-evt-hdlr.js"></script>
+<script type="text/javascript" src="scripts/spa-ctrl.js"></script>
+
+<script type="text/javascript">
+HTML_PARAMETERS = {
+	extraAvatarsText : "",
+	initialAvatar : "anna",
+	spaWidth     : "92%",
+	spaHeight    : "96%"
+};
+if (typeof parent.getSPAWidth === "function") {
+	HTML_PARAMETERS.spaWidth = parent.getSPAWidth();
+}
+if (typeof parent.getSPAHeight === "function") {
+	HTML_PARAMETERS.spaHeight = parent.getSPAHeight();
+}
+// NB The following call needs to happen before the SPA proxy is created by
+// the spaframe's spa-proxy.js script.  So, for example, doing it in response
+// to the frameset's onload event would be too late.
+SPACTRL.setParams( HTML_PARAMETERS );
+</script>
+
+</head>
+
+<frameset rows="*" cols="*" border="0">
+	<frame src="spa-frame.html" name="spaframe" id="spaframe"
+		frameborder="0" scrolling="no" noresize
+	>
+</frameset>
+
+</html>

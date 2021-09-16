@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp codebase="http://localhost/jas/loc2021/" 
+	  href="gluegen-rt.jnlp" version="v2.3.2">
+  <information>
+    <title>GlueGen Runtime v2</title>
+    <vendor>JogAmp Community</vendor>
+    <homepage href="http://jogamp.org/"/>
+    <description>GlueGen Runtime Library</description>
+    <description kind="short">Run-time support classes and native code for applications and libraries built using the GlueGen tool.</description>
+    <offline-allowed/>
+  </information>
+  <security>
+      <all-permissions />
+  </security>
+  <update check="background" policy="always"/>
+
+    <resources>
+      <jar href="jars/jnlp/gluegen-rt.jar" main="true" />
+      <jar href="jogl/gluegen-rt.jar" />
+    </resources>
+
+    <resources os="Windows" arch="x86">
+      <nativelib href = "jogl/gluegen-rt-natives-windows-i586.jar" />
+    </resources>
+    <resources os="Windows" arch="amd64">
+      <nativelib href = "jogl/gluegen-rt-natives-windows-amd64.jar" />
+    </resources>
+    <resources os="Windows" arch="x86_64">
+      <nativelib href = "jogl/gluegen-rt-natives-windows-amd64.jar" />
+    </resources>
+    <resources os="Mac OS X" arch="i386">
+      <nativelib href = "jogl/gluegen-rt-natives-macosx-universal.jar" />
+    </resources>
+    <resources os="Mac OS X" arch="x86_64">
+      <nativelib href = "jogl/gluegen-rt-natives-macosx-universal.jar" />
+    </resources>
+
+  <component-desc />
+</jnlp>

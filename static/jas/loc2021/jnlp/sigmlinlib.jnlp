@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp codebase="http://localhost/jas/loc2021/"
+    href="jnlp/sigmlinlib.jnlp">
+
+  <information>
+    <title>SiGMLInLib</title>
+    <vendor>JASigning loc.2021</vendor>
+    <description>SiGML Input/Edit/Dispatch Stand-alone Module</description>
+    <offline-allowed />
+  </information>
+
+  <security>  <all-permissions />  </security>
+
+  <update check="always" policy="always" />
+
+  <resources>
+    <jar href="jars/sigmlinlib.jar" main="true" />
+    <extension name="antlr" href="jnlp/antlr.jnlp" />
+  </resources>
+
+  <component-desc />
+</jnlp>

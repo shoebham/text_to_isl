@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sigml>
+
+  <hns_sign gloss="SCOTLAND-new">
+    <hamnosys_nonmanual>
+      <hnm_mouthpicture picture="skQtl@nd"/>
+    </hamnosys_nonmanual>
+    <hamnosys_manual>
+      <hamfist/>
+        <hamthumbacrossmod/>
+        <hamextfingero/>
+        <hambetween/>
+        <hamextfingerol/>
+        <hampalml/>
+        <hamchest/>
+        <hambetween/>
+        <hamshoulders/>
+        <hamlrat/>
+        <hamclose/>
+        <hamseqbegin/>
+        <hamelbow/>
+        <hammovedl/>
+        <hamrepeatreverse/>
+        <hamrepeatreverse/>
+        <hamseqend/>
+    </hamnosys_manual>
+  </hns_sign>
+
+</sigml>

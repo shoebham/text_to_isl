@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp codebase="http://localhost/jas/loc2021/"
+    href="jnlp/log4jcore.jnlp">
+
+  <information>
+    <title>Log4J Core for JASigning</title>
+    <vendor>JASigning loc.2021</vendor>
+    <description>Log4J Core v2.3 for JASigning</description>
+    <offline-allowed />
+  </information>
+
+  <security>  <all-permissions />  </security>
+
+  <update check="always" policy="always" />
+
+  <resources>
+    <jar href="jars/log4j-core-2.3.jar" />
+  </resources>
+
+  <component-desc />
+</jnlp>

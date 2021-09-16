@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp codebase="http://localhost/jas/loc2021/"
+    href="jnlp/jas-apps.jnlp">
+
+  <information>
+    <title>JASigning Apps and Applets</title>
+    <vendor>JASigning loc.2021</vendor>
+    <description>JASigning Apps and Applets</description>
+    <offline-allowed />
+  </information>
+
+  <security>  <all-permissions />  </security>
+
+  <update check="always" policy="always" />
+
+  <resources>
+    <jar href="jars/use-jarp.jar" main="true" />
+    <extension name="jasigning"
+		href="jnlp/jasigning.jnlp" />
+  </resources>
+
+  <component-desc />
+</jnlp>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp codebase="../" href="jnlp/SiWikiSPA.jnlp">
+
+  <information>
+    <title>Sign Wiki Player Applet (jogamp.org JOGL 2.3.2, Oct 2015)</title>
+    <vendor>JASigning loc.2021</vendor>
+    <homepage href="jnlp/index.html" />
+    <description>Plays and Processes SiGML for Sign Wiki</description>
+	<icon href="anna.png" />
+    <offline-allowed />
+  </information>
+
+  <security>  <all-permissions />  </security>
+
+  <update check="always" policy="always" />
+
+  <resources>
+    <j2se version="1.5+" initial-heap-size="96m" max-heap-size="256m" />
+
+    <jar href="jars/siwiki.jar" main="true" />
+    <jar href="jars/use-jarp.jar" />
+    <jar href="jars/hns-convert.jar" />
+    <extension name="jasigning" href="jnlp/jasigning.jnlp" />
+    <property name="sun.java2d.noddraw" value="true" />
+  </resources>
+
+  <!--
+  According to the spec. the width and height values here are ignored
+  in favour of those specified in the HTML applet tag.
+  -->
+  <applet-desc  main-class="siwiki.SiWikiApplet"
+      documentBase="http://localhost/jas/loc2021/"
+      name="siwikiapplet"
+      width="320"   height="240">
+
+    <param name="scriptable" value="true" />
+    <param name="mayscript" value="true" />
+    <param name="progressbar" value="true" />
+    
+    <param name="options" value="SiWikiApplet" />
+    <param name="ja.version.tag" value="loc2021" />
+    <param name="ja.remote.base.url" value="/jas/loc2021/" />
+    <param name="do.streamed.animation.build" value="true" />
+    <param name="camera.settings" value="0.0:0.230:2.5:9.0:18.0:30.0:-1.0:-1.0" />
+    <param name="animgen.fps" value="50" />
+    <param name="avatar.id" value="francoise" />
+    <param name="avatar.id.list"           value="francoise:beatrice:robotboy:luna:siggi" />
+    <param name="cacheable.avatar.list"    value="francoise:beatrice:robotboy:luna:siggi" />
+    <param name="do.idle.ambient" value="true" />
+    <param name="do.busy.ambient" value="false" />
+    <param name="quit.delay.ms" value="400" />
+    
+  </applet-desc>
+</jnlp>

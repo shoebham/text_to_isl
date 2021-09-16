@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>SiGML Signing App Gui: loc.2021</title>
+
+<meta http-equiv="Access-Control-Allow-Methods" content="GET">
+
+<!-- CWA @ localhost/jas/loc2021 -->
+
+<link rel="stylesheet"
+    href="http://localhost/jas/loc2021/cwa/cwasa.css" />
+<script type="text/javascript"
+    src="http://localhost/jas/loc2021/cwa/allcsa.js"></script>
+
+</head>
+
+<body onload="CWASA.init();">
+<div><div class=empty>
+<h3>Original Electron SiGML-Player. JASigning: loc.2021</h3>
+<br>
+<table align="center" >
+<tr>
+
+<td align="left" valign="center" width="250" height="280" >
+	<!-- CWA signing avatar 0 -->
+	<div class="CWASAAvatar av0" align="center" ></div>
+</td>
+
+<td></td>
+
+<td align="center" valign="center">
+
+<!--================================================================-->
+<!-- Bespoke signing avatar GUI 0 -->
+<!--================================================================-->
+
+<div class="divCtrlPanel">
+
+<!-- Avatar Menu -->
+Avatar: <span class="CWASAAvMenu av0" ></span>
+<br/>
+
+<br/>
+
+<!-- Speed Buttons -->
+Speed (log<sub>2</sub> scale):
+<input class="txtLogSpeed av0" value="+1.0" type="text" />
+
+<input type="button" value="-" class="bttnSpeedDown av0" />
+<input type="button" value="+" class="bttnSpeedUp av0" />
+<input type="button" value="Reset" class="bttnSpeedReset av0" />
+
+<hr/>
+
+<!-- SiGML URL -->
+SiGML URL:<br>
+<input class="txtSiGMLURL av0" value="welkom-ngt.sigml" type="text" />
+
+<br>
+
+<!-- SiGML Text -->
+SiGML Text:<br>
+<textarea class="txtaSiGMLText av0" rows="4" >
+<?xml version="1.0" encoding="utf-8"?>
+<sigml>
+
+<hns_sign gloss="mug">
+  <hamnosys_nonmanual>
+    <hnm_mouthpicture picture="mVg"/>
+  </hamnosys_nonmanual>
+  <hamnosys_manual>
+    <hamfist/> <hamthumbacrossmod/>
+        <hamextfingerol/> <hampalml/>
+    <hamshoulders/>
+    <hamparbegin/> <hammoveu/> <hamarcu/>
+        <hamreplace/> <hamextfingerul/> <hampalmdl/>
+    <hamparend/>
+  </hamnosys_manual>
+</hns_sign>
+
+<hns_sign gloss="take">
+  <hamnosys_nonmanual>
+    <hnm_mouthpicture picture="te_Ik"/>
+  </hamnosys_nonmanual>
+  <hamnosys_manual>
+    <hamceeall/> <hamextfingerol/> <hampalml/>
+    <hamlrbeside/> <hamshoulders/> <hamarmextended/>
+    <hamreplace/> <hamextfingerl/> <hampalml/>
+    <hamchest/> <hamclose/>
+  </hamnosys_manual>
+</hns_sign>
+
+<hns_sign gloss="i">
+  <hamnosys_nonmanual>
+    <hnm_mouthpicture picture="a_I"/>
+  </hamnosys_nonmanual>
+  <hamnosys_manual>
+    <hamfinger2/> <hamthumbacrossmod/>
+    <hamextfingeril/> <hampalmr/>
+    <hamchest/> <hamtouch/>
+  </hamnosys_manual>
+</hns_sign>
+
+</sigml>
+</textarea>
+
+<br>
+
+<!-- Avatar/Play/Stop BUTTONS -->
+<input type="button" value="Play SiGML URL" class="bttnPlaySiGMLURL av0" />
+<input type="button" value="Play SiGML Text" class="bttnPlaySiGMLText av0" />
+&nbsp;
+<input type="button" value="Stop" class="bttnStop av0" />
+
+<br>
+
+<input value="Suspend" class="bttnSuspend av0" type="button">
+<input value="Resume" class="bttnResume av0" type="button">
+&nbsp;
+Frames:
+<input value="+1" class="bttnNextF av0" type="button">
+<input value="-1" class="bttnPrevF av0" type="button">
+
+<hr/>
+
+<!-- Progress and Status -->
+<span style="font-size: 90%;" >
+Sign/Frame:
+<input class="txtSF av0" value="0/0" type="text">
+&nbsp;
+Gloss:
+<input class="txtGloss av0" value="[none]" type="text">
+&nbsp;
+FPS:
+<input class="txtFPS av0" value="00.00" type="text" />
+<br/>
+
+Status:
+<input type="text" class="statusExtra av0" />
+</span>
+
+</div>
+<!--================================================================-->
+
+</td>
+</tr>
+</table>
+</div>
+
+<!-- End of CWASA page -->
+
+</div></div>
+
+</body>
+
+</html>

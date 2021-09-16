@@ -1,0 +1,23 @@
+{
+  "description"     : "========  CWASA client configuration data ========",
+
+  "avSettings" : [
+    {
+      "width":            384,
+      "height":           320,
+      "avList":           "avsfull",
+      "initAv":           "luna",
+      "initSiGMLURL":     "scotland-H.sigml"
+    },
+    {
+      "width":            228,
+      "height":           208,
+      "background":       "Salmon",
+      "avList":           "avs",
+      "initAv":           "francoise",
+      "allowFrameSteps":  false,
+      "allowSiGMLText":   false,
+      "initSiGMLURL":     "welkom-ngt.sigml"
+    }
+  ]
+}

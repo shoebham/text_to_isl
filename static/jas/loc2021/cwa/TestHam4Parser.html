@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta charset="utf-8">
+
+	<meta http-equiv="Access-Control-Allow-Origin" content="*">
+	<meta http-equiv="Access-Control-Allow-Methods" content="GET">
+
+    <script type="text/javascript" src="http://localhost/jas/loc2021/cwa/allcsa.js"></script>
+
+    <style type="text/css">
+      #tree {
+        padding: 20px;
+        font-family: Monospace;
+      }
+      .leaf {
+        font-weight: bold;
+        font-size: 130%;
+      }
+    </style>
+
+    <script type="text/javascript">
+
+    var cwaenv = this.getCWAEnv();
+    var DIN = cwaenv.get("DataInput");
+    var HtoG = cwaenv.get("HtoG");
+    var Data = cwaenv.get("Data");
+    var Ham4Parser = cwaenv.get("Ham4Parser");
+
+    var h2g;
+
+    function init() {
+      document.getElementById("parseURI").onclick = parseSiGMLURI;
+      document.getElementById("parseText").onclick = parseSiGMLText;
+      CWASA.init();
+    }
+
+	function theCallBack(theRes) {
+      if (theRes.errCount > 0) {
+        console.warn("Errors: "+theRes.errCount+" Text:\n"+theRes.errText);
+      }
+      if (theRes.sigDoc != null) {
+        var theG = theRes.sigDoc;
+        h2g.sortDocAttrs(theG);
+        var theGtxt = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + Data.ppDOM(theG.documentElement);
+        if (theRes.errCount > 0) {
+          console.warn(theGtxt);
+        } else {
+          console.log(theGtxt);
+        }
+      }
+	}
+
+	function parseSiGMLURI(){
+		var sigURI = document.getElementById("hamnosysURI").value;
+		var logLev = 0;
+		var HMLLog = false;
+		if (logLev >= 440) console.log( "parseSiGMLURI called for "+sigURI);
+		if (h2g == null) h2g = new HtoG ("h2s.xsl", HMLLog, logLev);
+		h2g.parseHtoGURI(sigURI, theCallBack);
+	}
+
+	function parseSiGMLText(){
+		var sigText = document.getElementById("hamnosysText").value;
+		var logLev = 0;
+		var HMLLog = false;
+		if (logLev >= 440) console.log( "parseSiGML called for "+sigURI);
+		if (h2g == null) h2g = new HtoG ("h2s.xsl", HMLLog, logLev);
+		h2g.parseHtoGText(sigText, theCallBack);
+	}
+
+    </script>
+  </head>
+<body onload="init()">
+<input id="hamnosysURI" type="text" size="64" value="Test.sigml" />  </textarea>
+  <button id="parseURI">Parse URI</button>
+  <br/>
+  <textarea id="hamnosysText" rows="20" cols="50">
+  </textarea>
+  <button id="parseText">Parse Text</button>
+  <div id="tree"></div>
+<hr/>
+<p>
+<small>
+Available under the
+<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons BY-NC-ND License</a>. JRWG 2021-01-19
+</small>
+</body>
+</html>

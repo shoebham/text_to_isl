@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sigml>
+
+<hamgestural_sign gloss="video">
+  <sign_manual both_hands="true">
+    <handconfig handshape="finger23spread" thumbpos="across"/>
+    <handconfig extfidir="do"/>
+    <handconfig palmor="d"/>
+    <circularmotion axis="d"/>
+  </sign_manual>
+</hamgestural_sign>
+
+<hamgestural_sign gloss="exciting">
+  <sign_manual both_hands="true" lr_symm="true">
+    <handconfig handshape="finger2345" mainbend="round" thumbpos="out"/>
+    <handconfig extfidir="l"/>
+    <handconfig palmor="l"/>
+    <location_bodyarm location="chest" second_location="chest" second_side="right_at" contact="touch">
+      <location_hand location="tip" digits="2"/>
+    </location_bodyarm>
+    <split_motion manner="fast">
+      <seq_motion>
+        <directedmotion direction="u" size="small"/>
+        <directedmotion direction="d"/>
+        <directedmotion direction="u"/>
+        <directedmotion direction="d"/>
+        <directedmotion direction="u" size="small"/>
+      </seq_motion>
+      <seq_motion>
+        <directedmotion direction="d" size="small"/>
+        <directedmotion direction="u"/>
+        <directedmotion direction="d"/>
+        <directedmotion direction="u"/>
+        <directedmotion direction="d" size="small"/>
+      </seq_motion>
+    </split_motion>
+  </sign_manual>
+</hamgestural_sign>
+
+<hamgestural_sign gloss="see">
+  <sign_manual>
+    <handconfig handshape="finger23" thumbpos="across"/>
+    <handconfig extfidir="u"/>
+    <handconfig palmor="l"/>
+    <location_bodyarm location="lips" side="right_at" contact="touch"/>
+    <directedmotion direction="or"/>
+  </sign_manual>
+</hamgestural_sign>
+
+<hamgestural_sign gloss="dropped">
+  <sign_manual/>
+</hamgestural_sign>
+
+<hamgestural_sign gloss="punct">
+  <sign_manual/>
+</hamgestural_sign>
+
+<hamgestural_sign gloss="tell_story">
+  <sign_manual both_hands="true" lr_symm="true" outofphase="true">
+    <handconfig handshape="flat" thumbpos="out"/>
+    <handconfig extfidir="ul"/>
+    <handconfig palmor="ul"/>
+    <handconstellation contact="close">
+      <location_hand location="tip" digits="3"/>
+      <location_hand location="palm"/>
+      <location_bodyarm location="shoulders"/>
+    </handconstellation>
+    <rpt_motion repetition="fromstart">
+      <tgt_motion>
+        <circularmotion axis="l"/>
+        <handconstellation contact="close">
+          <location_hand location="tip" digits="3"/>
+          <location_hand location="palm"/>
+        </handconstellation>
+      </tgt_motion>
+    </rpt_motion>
+  </sign_manual>
+</hamgestural_sign>
+
+<hamgestural_sign gloss="dropped">
+  <sign_manual/>
+</hamgestural_sign>
+
+<hamgestural_sign gloss="punct">
+  <sign_manual/>
+</hamgestural_sign>
+
+<hamgestural_sign gloss="in">
+  <sign_manual>
+    <handconfig handshape="finger2" thumbpos="across"/>
+    <handconfig extfidir="or" second_extfidir="r"/>
+    <handconfig palmor="l"/>
+    <location_bodyarm location="shoulders" side="right_at"/>
+  </sign_manual>
+</hamgestural_sign>
+
+<hamgestural_sign gloss="film">
+  <sign_manual>
+    <split_handconfig>
+      <handconfig handshape="flat"/>
+      <handconfig handshape="finger2" thumbpos="across"/>
+    </split_handconfig>
+    <split_handconfig>
+      <handconfig extfidir="u" palmor="d"/>
+      <handconfig extfidir="r" palmor="r"/>
+    </split_handconfig>
+    <split_location>
+      <location_hand digits="2" contact="touch"/>
+      <location_hand location="wristback" side="palmar" contact="touch"/>
+    </split_location>
+    <wristmotion motion="swinging"/>
+  </sign_manual>
+</hamgestural_sign>
+
+<hamgestural_sign gloss="woman">
+  <sign_manual>
+    <handconfig handshape="finger2" thumbpos="across"/>
+    <handconfig extfidir="u"/>
+    <handconfig palmor="dl"/>
+    <location_bodyarm location="lips" side="right_at" contact="touch">
+      <location_hand location="tip" digits="2"/>
+    </location_bodyarm>
+    <rpt_motion repetition="fromstart">
+      <directedmotion direction="o" size="small">
+        <location_bodyarm location="lips" contact="touch"/>
+      </directedmotion>
+    </rpt_motion>
+  </sign_manual>
+</hamgestural_sign>
+
+<hamgestural_sign gloss="i">
+  <sign_manual>
+    <handconfig handshape="finger2" thumbpos="across"/>
+    <handconfig extfidir="il"/>
+    <handconfig palmor="r"/>
+    <location_bodyarm location="chest" contact="touch"/>
+  </sign_manual>
+</hamgestural_sign>
+
+<hamgestural_sign gloss="punct">
+  <sign_manual/>
+</hamgestural_sign>
+
+<hamgestural_sign gloss="four">
+  <sign_manual>
+    <handconfig handshape="finger2345" thumbpos="across"/>
+    <handconfig extfidir="u"/>
+    <handconfig palmor="u"/>
+    <location_bodyarm location="shoulders" side="right_at"/>
+  </sign_manual>
+</hamgestural_sign>
+
+<hamgestural_sign gloss="friend">
+  <sign_manual both_hands="true" lr_symm="true">
+    <split_handconfig>
+      <handconfig handshape="ceeall"/>
+      <handconfig handshape="flat" mainbend="round" thumbpos="out"/>
+    </split_handconfig>
+    <split_handconfig>
+      <handconfig extfidir="dl" second_extfidir="l" palmor="l"/>
+      <handconfig extfidir="r" palmor="r"/>
+    </split_handconfig>
+    <handconstellation contact="touch">
+      <location_hand location="handback"/>
+      <location_hand location="palm"/>
+    </handconstellation>
+    <rpt_motion repetition="fromstart">
+      <directedmotion direction="d" size="small"/>
+    </rpt_motion>
+  </sign_manual>
+</hamgestural_sign>
+
+<hamgestural_sign gloss="invite">
+  <sign_manual>
+    <handconfig handshape="pinch12open"/>
+    <handconfig extfidir="uo"/>
+    <handconfig palmor="d"/>
+    <location_bodyarm location="shoulders" side="right_beside"/>
+    <par_motion>
+      <directedmotion direction="i"/>
+      <tgt_motion>
+        <changeposture/>
+        <handconfig handshape="pinch12open"/>
+        <location_bodyarm location="chest"/>
+      </tgt_motion>
+    </par_motion>
+  </sign_manual>
+</hamgestural_sign>
+
+<hamgestural_sign gloss="dropped">
+  <sign_manual/>
+</hamgestural_sign>
+
+<hamgestural_sign gloss="punct">
+  <sign_manual/>
+</hamgestural_sign>
+
+<hamgestural_sign gloss="cook">
+  <sign_manual both_hands="true" lr_symm="true" outofphase="true">
+    <handconfig handshape="finger2" mainbend="hooked"/>
+    <handconfig extfidir="o"/>
+    <handconfig palmor="l"/>
+    <rpt_motion repetition="fromstart">
+      <seq_motion>
+        <directedmotion direction="i" size="small"/>
+        <directedmotion direction="o" size="small"/>
+      </seq_motion>
+    </rpt_motion>
+  </sign_manual>
+</hamgestural_sign>
+
+<hamgestural_sign gloss="soup">
+  <sign_manual>
+    <handconfig handshape="finger2" mainbend="hooked"/>
+    <handconfig extfidir="ol"/>
+    <handconfig palmor="l"/>
+    <location_bodyarm location="shouldertop"/>
+    <rpt_motion repetition="fromstart">
+      <tgt_motion>
+        <circularmotion axis="l" size="small"/>
+        <location_bodyarm location="lips" contact="close"/>
+      </tgt_motion>
+    </rpt_motion>
+  </sign_manual>
+</hamgestural_sign>
+
+<hamgestural_sign gloss="i">
+  <sign_manual>
+    <handconfig handshape="finger2" thumbpos="across"/>
+    <handconfig extfidir="il"/>
+    <handconfig palmor="r"/>
+    <location_bodyarm location="chest" contact="touch"/>
+  </sign_manual>
+</hamgestural_sign>
+
+<hamgestural_sign gloss="punct">
+  <sign_manual/>
+</hamgestural_sign>
+
+<hamgestural_sign gloss="orange">
+  <sign_manual>
+    <handconfig handshape="finger2345" mainbend="round" thumbpos="out"/>
+    <handconfig extfidir="u"/>
+    <handconfig palmor="dl"/>
+    <location_bodyarm location="lips" side="right_at" contact="close"/>
+    <rpt_motion repetition="fromstart">
+      <tgt_motion>
+        <changeposture/>
+        <handconfig handshape="fist"/>
+      </tgt_motion>
+    </rpt_motion>
+  </sign_manual>
+</hamgestural_sign>
+
+<hamgestural_sign gloss="blender">
+  <sign_manual both_hands="true" lr_symm="true" outofphase="true">
+    <split_handconfig>
+      <handconfig handshape="finger2" mainbend="halfbent" thumbpos="across"/>
+      <handconfig handshape="finger2" mainbend="halfbent" thumbpos="across"/>
+    </split_handconfig>
+    <split_handconfig>
+      <handconfig extfidir="dol" palmor="d"/>
+      <handconfig extfidir="uor" palmor="u"/>
+    </split_handconfig>
+    <split_location>
+      <location_bodyarm location="chest">
+        <location_hand location="tip" digits="2"/>
+      </location_bodyarm>
+      <location_bodyarm location="stomach">
+        <location_hand location="tip" digits="2"/>
+      </location_bodyarm>
+    </split_location>
+    <circularmotion axis="u"/>
+  </sign_manual>
+</hamgestural_sign>
+
+<hamgestural_sign gloss="put">
+  <sign_manual>
+    <handconfig handshape="ceeall"/>
+    <handconfig extfidir="or"/>
+    <handconfig palmor="l"/>
+    <location_bodyarm location="shoulders" side="right_beside" contact="armextended"/>
+    <tgt_motion>
+      <changeposture/>
+      <handconfig handshape="ceeall"/>
+      <handconfig extfidir="or" second_extfidir="r"/>
+      <location_bodyarm location="shoulders" side="right_at" contact="armextended"/>
+    </tgt_motion>
+  </sign_manual>
+</hamgestural_sign>
+
+<hamgestural_sign gloss="dropped">
+  <sign_manual/>
+</hamgestural_sign>
+
+<hamgestural_sign gloss="punct">
+  <sign_manual/>
+</hamgestural_sign>
+
+<hamgestural_sign gloss="blender">
+  <sign_manual both_hands="true" lr_symm="true" outofphase="true">
+    <split_handconfig>
+      <handconfig handshape="finger2" mainbend="halfbent" thumbpos="across"/>
+      <handconfig handshape="finger2" mainbend="halfbent" thumbpos="across"/>
+    </split_handconfig>
+    <split_handconfig>
+      <handconfig extfidir="dol" palmor="d"/>
+      <handconfig extfidir="uor" palmor="u"/>
+    </split_handconfig>
+    <handconstellation contact="close">
+      <location_hand location="tip" digits="2"/>
+      <location_hand location="tip" digits="2"/>
+      <location_bodyarm location="chest"/>
+    </handconstellation>
+    <circularmotion axis="u"/>
+  </sign_manual>
+</hamgestural_sign>
+
+<hamgestural_sign gloss="explode">
+  <sign_manual both_hands="true" lr_symm="true">
+    <handconfig handshape="pinchall" mainbend="hooked"/>
+    <handconfig extfidir="o"/>
+    <handconfig palmor="u"/>
+    <location_bodyarm location="stomach" contact="close"/>
+    <par_motion>
+      <directedmotion direction="u" size="small"/>
+      <tgt_motion>
+        <changeposture/>
+        <handconfig handshape="finger2345" thumbpos="out"/>
+        <handconfig extfidir="u"/>
+      </tgt_motion>
+    </par_motion>
+    <directedmotion direction="u"/>
+  </sign_manual>
+</hamgestural_sign>
+
+<hamgestural_sign gloss="punct">
+  <sign_manual/>
+</hamgestural_sign>
+
+<hamgestural_sign gloss="orange">
+  <sign_manual>
+    <handconfig handshape="finger2345" mainbend="round" thumbpos="out"/>
+    <handconfig extfidir="u"/>
+    <handconfig palmor="dl"/>
+    <location_bodyarm location="lips" side="right_at" contact="close"/>
+    <rpt_motion repetition="fromstart">
+      <tgt_motion>
+        <changeposture/>
+        <handconfig handshape="fist"/>
+      </tgt_motion>
+    </rpt_motion>
+  </sign_manual>
+</hamgestural_sign>
+
+<hamgestural_sign gloss="splash_onto">
+  <sign_manual both_hands="true" lr_symm="true">
+    <handconfig handshape="finger2345" thumbpos="out"/>
+    <handconfig extfidir="u"/>
+    <handconfig palmor="u"/>
+    <location_bodyarm location="chest" side="right_at" second_location="chest">
+      <location_hand location="wristback" side="palmar"/>
+    </location_bodyarm>
+    <tgt_motion>
+      <directedmotion direction="i"/>
+      <location_bodyarm location="chest" side="right_at" second_location="chest" contact="touch">
+        <location_hand location="wristback" side="palmar"/>
+      </location_bodyarm>
+    </tgt_motion>
+    <directedmotion direction="d" manner="slow"/>
+  </sign_manual>
+</hamgestural_sign>
+
+<hamgestural_sign gloss="dropped">
+  <sign_manual/>
+</hamgestural_sign>
+
+</sigml>

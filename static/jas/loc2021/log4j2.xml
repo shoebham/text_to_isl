@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+	<CustomLevels>
+		<CustomLevel name="STATS" intLevel="420" />
+		<CustomLevel name="LOG" intLevel="440" />
+	</CustomLevels>
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %-7marker:  %msg  [%t %logger{36}]%n"/>
+			<Filters>
+				<MarkerFilter marker="SESSION"	onMatch="NEUTRAL"	onMisMatch="NEUTRAL"/>
+				<MarkerFilter marker="THREAD"	onMatch="DENY"		onMisMatch="NEUTRAL"/>
+				<MarkerFilter marker="CACHE"	onMatch="NEUTRAL"	onMisMatch="NEUTRAL"/>
+				<MarkerFilter marker="SCRIPT"	onMatch="DENY"		onMisMatch="NEUTRAL"/>
+				<MarkerFilter marker="COMMAND"	onMatch="DENY"		onMisMatch="NEUTRAL"/>
+				<MarkerFilter marker="EVENT"	onMatch="DENY"		onMisMatch="NEUTRAL"/>
+				<MarkerFilter marker="GUI"		onMatch="DENY"		onMisMatch="NEUTRAL"/>
+				<MarkerFilter marker="CONTROL"	onMatch="DENY"		onMisMatch="NEUTRAL"/>
+				<MarkerFilter marker="SIGML"	onMatch="DENY"		onMisMatch="NEUTRAL"/>
+				<MarkerFilter marker="AVATAR"	onMatch="NEUTRAL"	onMisMatch="NEUTRAL"/>
+				<MarkerFilter marker="CAMERA"	onMatch="NEUTRAL"	onMisMatch="NEUTRAL"/>
+				<MarkerFilter marker="ANIMGEN"	onMatch="NEUTRAL"	onMisMatch="NEUTRAL"/>
+				<MarkerFilter marker="VIDEO"	onMatch="NEUTRAL"	onMisMatch="NEUTRAL"/>
+				<MarkerFilter marker="RENDER"	onMatch="NEUTRAL"	onMisMatch="NEUTRAL"/>
+				<MarkerFilter marker="SYNC"		onMatch="NEUTRAL"	onMisMatch="NEUTRAL"/>
+				<MarkerFilter marker="SIGN"		onMatch="NEUTRAL"	onMisMatch="NEUTRAL"/>
+				<MarkerFilter marker="FRAME"	onMatch="DENY"		onMisMatch="NEUTRAL"/>
+				<MarkerFilter marker="PHASE"	onMatch="DENY"		onMisMatch="NEUTRAL"/>
+				<MarkerFilter marker="ANTLR"	onMatch="DENY" 		onMismatch="NEUTRAL"/>
+	      		<ThresholdFilter level="LOG"	onMatch="NEUTRAL"	onMisMatch="DENY"/>
+			</Filters>
+		</Console>
+	</Appenders>
+	<Loggers>
+		<Root level="ALL">
+			<AppenderRef ref="Console"/>
+		</Root>
+	</Loggers>
+</Configuration> 

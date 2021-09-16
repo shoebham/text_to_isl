@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0+" codebase="http://localhost/jas/loc2021/" href="jnlp/SToCA.jnlp">
+
+  <information>
+    <title>SiGML to CAS Applet (loc.2021)</title>
+    <vendor>JASigning loc.2021</vendor>
+    <homepage href="jnlp/index.html" />
+    <description>SiGML to CAS Applet</description>
+	<icon href="anna.png" />
+    <offline-allowed />
+  </information>
+
+  <security>  <all-permissions />  </security>
+
+  <update check="always" policy="always" />
+
+  <resources>
+    <java version="1.6+" />
+
+    <jar href="jars/jnlp/SToCA.jar" />
+    <jar href="jars/use-jarp.jar" main="true" />
+    <jar href="jars/jarpb.jar" />
+    <jar href="jars/sigmlinlib.jar" />
+    <jar href="jars/antlr-3.5.2-complete.jar" />
+    <jar href="jars/avatars/avatar-basic.jar" />
+    <jar href="jars/log4j-api-2.3.jar" />
+    <jar href="jars/log4j-core-2.3.jar" />
+</resources>
+
+  <resources>
+    <extension name="jaglib" href="jnlp/jaglib.jnlp" />
+  </resources>
+
+  <!--
+  According to the spec. the width and height values here are ignored
+  in favour of those specified in the HTML applet or object tag.
+  -->
+  <applet-desc  main-class="app.SToCApplet"
+      name="stocapplet"  width="1"   height="1">
+    <param name="scriptable" value="true" />
+    <param name="mayscript" value="true" />
+    <param name="progressbar" value="true" />
+    
+    <param name="options" value="SToCApplet" />
+    <param name="ja.version.tag" value="loc2021" />
+    <param name="ja.remote.base.url" value="/jas/loc2021/" />
+  </applet-desc>
+</jnlp>

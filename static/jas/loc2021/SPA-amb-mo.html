@@ -1,0 +1,223 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>SiGML Player Applet (loc.2021 JOGL-2)</title>
+
+<script type="text/javascript" src="scripts/spa-object.js"></script>
+
+<style type="text/css">
+.body {
+	background-color:#EEE;
+}
+.avapplet {
+	border-style: groove;  border-color: #8080C0;
+	border-width: 2px;  margin: 0.5ex;
+}
+.sigml {
+    font-family: monospace;  font-size: 0.9em; width: 512px;
+}
+.widefield {
+    font-family: sans-serif;  font-size: 0.8em;  width: 40em;
+}
+.smallfield {
+    font-family: sans-serif;  font-size: 0.8em;  width: 8em;
+}
+.avmenu {
+    font-family: sans-serif;  font-size: 0.8em;  width: 7em;
+}
+.fpsmenu {
+    font-family: sans-serif;  font-size: 0.8em;  width: 5em;
+}
+.ctrla {
+	border-style: groove;  border-color: #8080C0;
+	border-width: 2px;  padding: 1ex;  margin: 0.5ex;
+}
+</style>
+</head>
+
+<body class="body" onload="SPA.initialise()" onunload="SPA.terminate()">
+
+<h3>SiGML Player Applet (loc.2021 JOGL-2)</h3>
+
+<p><strong>NB These <a href="./index.html#conditions">conditions of use</a>
+apply to this JASigning software.</strong></p>
+
+<hr>
+
+<table align="center">
+<tr>
+
+<!-- APPLET -->
+<td align="left" valign="bottom">
+
+<applet name="sigmlplayerapplet"  id="spApplet"  class="avapplet"
+    	codebase="/jas/loc2021/"
+    	code="app.SiGMLPlayerApplet"
+    	width="336"  height="336" mayscript>
+    <param name="jnlp_href" value="jnlp/spa.jnlp" />
+</applet>
+
+</td>
+
+<td></td>
+
+<!-- CTRL A FORM -->
+<td valign="bottom" align="center">
+<form id="ctrlAForm" class="ctrla">
+
+<!-- AVATAR NAME -->
+Avatar:&nbsp;
+<select id="avSelect" onChange="SPA.selectAvatar()" class="avmenu" >
+<!--
+We don't explicitly specify the initial setting for the avatar menu,
+since the applet should generate an avatar-loaded event, which
+(via our Javascript) should cause the menu to be set appropriately.
+
+The duplicated information in the value attributes is needed for IE 6,
+which doesn't follow the spec.
+-->
+	<option value="anna">anna</option>
+	<option value="francoise">francoise</option>
+	<option value="marc">marc</option>
+</select>
+
+<br>
+
+<!-- Animgen FPS -->
+<!--
+Let the Javascript initialisation set the selected FPS value, which should
+match that specified in the applet's "animgen.fps" parameter (above).
+The duplicated information in the value attributes is needed for IE 6,
+which doesn't follow the spec.
+-->
+FPS:&nbsp;
+<select id="fpsSelect" onChange="SPA.setAnimgenFPS()" class="fpsmenu" >
+	<option value="10">10</option>
+	<option value="25">25</option>
+	<option value="40">40</option>
+	<option value="50">50</option>
+	<option value="60">60</option>
+	<option value="100">100</option>
+</select>
+
+<br><br>
+
+<!-- Logging checkbox -->
+<!-- initial setting ("checked") should match that of the applet argument
+     "do.spa.logging" -->
+SPA Logging:&nbsp;
+<input type="checkbox" value="Log" id="chkLog"
+	onClick="SPA.setLogFlag()" />
+<br>
+Log Dropped Frames:&nbsp;
+<input type="checkbox" value="DoLogDF" id="chkDoLogDroppedFrames"
+	onClick="SPA.setDoLogDroppedFrames()" />
+
+<br><br>
+
+<!-- Avatar/Play/Stop BUTTONS -->
+<input type="button" value="Play URL" id="bttnPlayURL"
+	onClick="SPA.startPlayURL()" />
+<input type="button" value="Play Text" id="bttnPlayText"
+	onClick="SPA.startPlayText()" />
+<br>
+<input type="button" value="Stop" id="bttnStop"
+	onClick="SPA.stopPlayer()" />
+
+<br><br>
+
+<!-- Speed Buttons -->
+<input type="button" value="Reset Speed" id="bttnResetSpeed"
+    onClick="SPA.resetSpeed()">
+<input type="button" value="-" id="bttnSlower" onClick="SPA.lowerSpeed()" />
+<input type="button" value="+" id="bttnFaster" onClick="SPA.raiseSpeed()" />
+
+</form>
+</td>
+</tr>
+</table>
+
+
+<table align="center">
+<tr>
+<td>
+<!-- CTRL B FORM -->
+<form id="ctrlBForm">
+
+<!-- SiGML URL -->
+SiGML URL:<br>
+<input type="text" id="urlText" class="widefield"
+	onKeyPress="SPA.handleURLKey( event )"
+	value="sigml/scotland-H.sigml" />
+
+<br>
+
+<!-- SiGML Text -->
+SiGML Text:<br>
+<textarea id="sigmlText" class="sigml" rows="4">
+<?xml version="1.0" encoding="utf-8"?>
+<sigml>
+
+<hns_sign gloss="mug">
+  <hamnosys_nonmanual>
+    <hnm_mouthpicture picture="mVg"/>
+  </hamnosys_nonmanual>
+  <hamnosys_manual>
+    <hamfist/> <hamthumbacrossmod/>
+        <hamextfingerol/> <hampalml/>
+    <hamshoulders/>
+    <hamparbegin/> <hammoveu/> <hamarcu/>
+        <hamreplace/> <hamextfingerul/> <hampalmdl/>
+    <hamparend/>
+  </hamnosys_manual>
+</hns_sign>
+
+<hns_sign gloss="take">
+  <hamnosys_nonmanual>
+    <hnm_mouthpicture picture="te_Ik"/>
+  </hamnosys_nonmanual>
+  <hamnosys_manual>
+    <hamceeall/> <hamextfingerol/> <hampalml/>
+    <hamlrbeside/> <hamshoulders/> <hamarmextended/>
+    <hamreplace/> <hamextfingerl/> <hampalml/>
+    <hamchest/> <hamclose/>
+  </hamnosys_manual>
+</hns_sign>
+
+<hns_sign gloss="i">
+  <hamnosys_nonmanual>
+    <hnm_mouthpicture picture="a_I"/>
+  </hamnosys_nonmanual>
+  <hamnosys_manual>
+    <hamfinger2/> <hamthumbacrossmod/>
+    <hamextfingeril/> <hampalmr/>
+    <hamchest/> <hamtouch/>
+  </hamnosys_manual>
+</hns_sign>
+
+</sigml>
+</textarea>
+
+<br>
+
+<!-- (Extra) STATUS LINE -->
+Status:<br>
+<input type="text" id="statusExtra" class="widefield" />
+
+</form>
+</td>
+</tr>
+</table>
+
+<p>
+<small>
+Available under the
+<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons BY-NC-ND License</a>. JRWG 2021-01-19
+</small>
+
+</body>
+
+</html>

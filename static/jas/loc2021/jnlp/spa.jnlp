@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp codebase="http://localhost/jas/loc2021/" href="jnlp/spa.jnlp">
+
+  <information>
+    <title>SiGML Player Applet (jogamp.org JOGL 2.3.2, Oct 2015)</title>
+    <vendor>JASigning loc.2021</vendor>
+    <homepage href="jnlp/index.html" />
+    <description>Plays SiGML URL or Text</description>
+	<icon href="anna.jpg" />
+    <offline-allowed />
+  </information>
+
+  <security>  <all-permissions />  </security>
+
+  <update check="always" policy="always" />
+
+  <resources>
+    <java version="1.6+"/>
+
+    <jar href="jars/jnlp/spa.jar" main="true" />
+    <jar href="jars/use-jarp.jar" />
+    <jar href="jars/jarpb.jar" />
+    <jar href="jars/sigmlinlib.jar" />
+    <jar href="jars/antlr-3.5.2-complete.jar" />
+    <jar href="jars/avatars/avatar-basic.jar" />
+    <jar href="jars/log4j-api-2.3.jar" />
+    <jar href="jars/log4j-core-2.3.jar" />
+    
+    <extension name="jaglib" href="jnlp/jaglib.jnlp" />
+    <extension name="jogl-all-awt" href="jnlp/jogl-all-awt.jnlp" />
+  </resources>
+
+  <!--
+  According to the spec. the width and height values here are ignored
+  in favour of those specified in the HTML applet tag.
+  -->
+  <applet-desc
+      documentbase="http://localhost/jas/loc2021/"
+      name="sigmlplayerapplet" 
+      main-class="app.SiGMLPlayerApplet"
+      width="320"   height="240">
+      
+    <param name="scriptable" value="true" />
+    <param name="mayscript" value="true" />
+    <param name="progressbar" value="true" />
+    
+    <param name="options" value="SiGMLPlayerApplet" />
+    <param name="ja.version.tag" value="loc2021" />
+    <param name="ja.remote.base.url" value="/jas/loc2021/" />
+  </applet-desc>
+</jnlp>

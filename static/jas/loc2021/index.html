@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>CWASA loc2021 Legacy</title>
+<!--
+<link rel="stylesheet" type="text/css" href="WHATEVER.css">
+-->
+<style type="text/css">
+h1,h2,h3 { color: navy }
+</style>
+
+</head>
+
+<body>
+
+<h1>CWA Signing Avatars : Legacy Release : Version loc2021 </h1>
+
+<p><strong>Please see the
+<a href="http://vh.cmp.uea.ac.uk/index.php/CWASA_Conditions_of_Use">Conditions of Use</a> applying to
+the <a href="http://vh.cmp.uea.ac.uk/index.php/CWA_Signing_Avatars">CWASA</a> software.</strong></p>
+
+<p>For information on this and previous releases of CWASA, please see
+the <a href="http://vh.cmp.uea.ac.uk/index.php/CWASA_Release_Notes">Release Notes</a> and <a href="http://vh.cmp.uea.ac.uk/index.php/CWASA_Platform_Issues">Platform Issues</a>.
+</p>
+
+<p>Some examples use a wider range of characters than the standard avatars Anna, Marc, Francoise, Luna and Siggi.
+The additional avatars are made available for evaluation only.
+Please contact <a href="mailto:cmp_virtualsigning@uea.ac.uk">cmp_virtualsigning@uea.ac.uk</a>
+to discuss commercial support and use of additional avatars.
+</p>
+
+<hr/>
+
+
+<a name="html5-pages"></a>
+<h2>HTML5 Web Pages using WebGL</h2>
+
+<p>
+These pages should function on all major browsers on Windows, Linux, and OS X.
+They should also function on iOS devices and modern tablets and smart phones.
+See below for a version transpiled for legacy browsers such as Internet Explorer.
+<br/>
+Feedback is welcomed via <a href="mailto:cmp_virtualsigning@uea.ac.uk">cmp_virtualsigning@uea.ac.uk</a>,
+including on experience with other platforms.
+</p>
+Pages using JavaScript in the browser to process SiGML data:
+<ul>
+<li><p><a href="./CWASA-plus-gui-panel.html">CWA Signing Avatars</a> (CWASA) with Avatar and GUI panels</p></li>
+<li><p><a href="./CWASA-plus-gui-elements.html">CWA Signing Avatars</a> (CWASA) with Avatar and GUI elements</p></li>
+<li><p><a href="./CWASA-plus-bespoke-gui.html">CWA Signing Avatars</a> (CWASA) with Avatar and bespoke GUI</p></li>
+</ul>
+
+<p>
+Pages using JavaScript in the browser to process SiGML data for Legacy browsers such as Internet Explorer:
+</p>
+<ul>
+<li><p><a href="./CWASA-legacy-gui-panel.html">CWA Signing Avatars</a> (CWASA) with Avatar and GUI panels</p></li>
+</ul>
+Versions of other example web pages can be created by changing the script file loaded for CWASA.
+<hr/>
+
+<h2>HTML5 Test Pages using JavaScript and WebGL</h2>
+
+<p>
+Test Pages using JavaScript in the browser to process SiGML data:
+<ul>
+<li><p><a href="./cwa/OneAvClient.html">WebGL example with one avatar</a></p></li>
+<li><p><a href="./cwa/TwoAvClient.html">WebGL example with two avatars</a></p></li>
+<li><p><a href="./cwa/OneAvClientTest.html">Single WebGL avatar Test Page for Animgen JavaScript Client</a></p></li>
+</ul>
+
+Test Pages using a server side CGI script to process SiGML data:
+<ul>
+<li><p><a href="./cwa/OneAvServer.html">WebGL example with one avatar</a></p></li>
+<li><p><a href="./cwa/TwoAvServer.html">WebGL example with two avatars</a></p></li>
+<li><p><a href="./cwa/OneAvServerTest.html">Single WebGL avatar Test Page for Animgen Server</a></p></li>
+</ul>
+
+Test Pages using a legacy Java Applet to process SiGML data:
+<ul>
+<li><p><a href="./cwa/OneAvApplet.html">WebGL example with one avatar</a></p></li>
+<li><p><a href="./cwa/TwoAvApplet.html">WebGL example with two avatars</a></p></li>
+</ul>
+Using Java Applets is deprecated and will only work with outdated browsers and Java installations.
+See the
+<a href="http://vh.cmp.uea.ac.uk/index.php/JASigning_Platform_Issues">JASigning Platform Issues</a> notes.
+<hr/>
+
+<h2>Applications using Node.js and Electron</h2>
+
+<p>An application for animating SiGML data is available based on the WebGL implementation via <a href="https://nodejs.org/en/">Node.js</a> and <a href="https://electronjs.org/">Electron</a>. Installers are available for OS X, Windows, and Linux. See the
+<a href="http://vh.cmp.uea.ac.uk/index.php/JASigning_Platform_Issues">JASigning Platform Issues</a> notes, especially for the Linux distribution.</p>
+<p>This is a prototype implementation providing the features of the HTML5 WebGL implementation. It does not currently have all the functionality of the <a href="#JWSPlayer">Java Web Start SiGML Player</a> application. </p>
+
+Apps using the standard set of avatars:
+<ul>
+<li><p><a href="./app/SiGML-Player.dmg">SiGML Player: OS X Installer</a>
+	<br>
+    Plays SiGML data as text or from a file from a given URL or as a sequence delivered on a network socket.<br/>
+    To Install: Double-Click DMG file to open. Move application to Applications or desired location.<br/>
+    To Run: Right-Click application (first time only) to authorise for launching.<br/>
+    For console log: In Terminal, from directory containing application, enter e.g. "SiGML-Player.app/Contents/MacOS/SiGML-Player".</p></li>
+<li><p><a href="./app/SiGML-Player.exe">SiGML Player: Windows Installer</a>
+	<br>
+    Plays SiGML data as text or from a file from a given URL or as a sequence delivered on a network socket.<br/>
+    To Install: Double-Click to run the installer EXE file. It may be necessary to bypass Windows Defender SmartScreen.<br/>
+    To Run: Double-Click the desktop shortcut for the application created by the installer.<br/>
+    For console log: In CMD, from the folder containing the application, enter e.g. "SiGML-Player.exe".</p></li>
+<li><p><a href="./app/SiGML-Player.AppImage">SiGML Player: Linux Installer</a>
+	<br>
+    Plays SiGML data as text or from a file from a given URL or as a sequence delivered on a network socket.<br/>
+    To Install: Right-Click AppImage to set Properties. In Permissions allow executing as a program.<br/>
+    To Run: Double-Click AppImage to launch.<br/>
+    For console log: In Terminal, from directory containing application, enter e.g. "SiGML-Player.AppImage".</p></li>
+</ul>
+
+The <a href="#SiGMLClient">Java Web Start SiGML Service Client</a> can be used to send SiGML data to the application.
+
+<h3>Web GUI for Electron apps</h3>
+Demonstration of the user interfaces used in Electron apps.
+
+
+<ul>
+<li><p><a href="./SiGML-Player-gui.html">SiGML-Player app</a></p>
+<li><p><a href="./SiGML-Player-Orig-gui.html">Original SiGML-Player app</a></p>
+</ul>
+<hr/>
+
+
+<a name="html-applets"></a>
+<h2>HTML web pages using legacy JASigning Java Applets</h2>
+
+<p>
+Using Java applets is deprecated and support ceased at the end of 2016.
+For comments on supported browsers see the
+<a href="http://vh.cmp.uea.ac.uk/index.php/JASigning_Platform_Issues">JASigning Platform Issues</a> notes.
+</p>
+
+<ul>
+<li><p><a href="./SPA-plus-amb-mo.html">SiGML Player Applet</a> (SPA)</p></li>
+<li><p><a href="./SPA-plus.html">SPA without idle ambient motion</a></p></li>
+<li><p><a href="./SPA-framed-gui-LS-win.html">Frame-based SPA</a></p></li>
+</ul>
+
+<hr/>
+
+
+<h2>Applications using Java Web Start</h2>
+
+<p>JASigning applications are launched via JNLP files. Users of JASigning on OS X should see the comments
+on Java Web Start in the <a href="http://vh.cmp.uea.ac.uk/index.php/JASigning_Platform_Issues">JASigning Platform Issues</a> notes.</p>
+
+<a name="JWSPlayer"></a>
+<ul>
+<li><p><a href="./jnlp/SiGMLPlayer.jnlp">SiGML Player</a>
+	<br>
+    Plays a SiGML file from a given URL or a SiGML sequence delivered on a network socket.</p></li>
+</ul>
+<a name="SiGMLClient"></a>
+Java Web Start App for sending SiGML data to SiGML Player:
+<ul>
+<li><p><a href="./jnlp/SiGMLServiceClientApp.jnlp">SiGML Service Client</a><br>
+    Allows SiGML files to be input, edited, and sent to the SiGML Player or SiGML Service Player
+	application.</p></li>
+</ul>
+
+Java Web Start Apps using a full range of avatars:
+<ul>
+<li><p><a href="./jnlp/SiGMLPlayer-plus.jnlp">SiGML Player</a>
+	(with extra avatars)<br>
+    Plays a SiGML file from a given URL or a SiGML sequence delivered on a network socket.</p></li>
+<li><p><a href="./jnlp/SiGMLURLApp-plus.jnlp">SiGML URL Player</a>
+	(with extra avatars)<br>
+    Plays a SiGML file from a given <tt>file:</tt> or <tt>http:</tt> URL.</p></li>
+<li><p><a href="./jnlp/SiGMLURLApp-rnid.jnlp">SiGML URL Player</a>
+	(for RNID)<br>
+    Plays a SiGML file from a given <tt>file:</tt> or <tt>http:</tt> URL.</p></li>
+<li><p><a href="./jnlp/SiGMLServicePlayer-plus.jnlp">SiGML Service Player</a>
+	(with extra avatars)<br>
+    Plays a SiGML sequence delivered on a network socket, for example
+	by the SiGML Client application (final item).
+	Also accepts switch-avatar requests via a (different) network socket.
+	Has the usual range of GUI controls.</p></li>
+<li><p><a href="./jnlp/SiGMLServicePlayer-rnid.jnlp">SiGML Service Player</a>
+	(for RNID)<br>
+    Plays a SiGML sequence delivered on a network socket, for example
+	by the SiGML Client application (next item).</p></li>
+<li><p><a href="./jnlp/BareSiGMLPlayer-plus.jnlp">Bare SiGML Player</a>
+	(with extra avatars)<br>
+    Plays a SiGML sequence delivered on a network socket.
+	Also accepts switch-avatar requests via a (different) network socket.
+	Has no GUI, apart from the avatar pane iteself.</p></li>
+<li><p><a href="./jnlp/SiGMLServiceClientApp.jnlp">SiGML Service Client</a><br>
+    Allows SiGML files to be input, edited, and sent to the SiGML Player or SiGML Service Player
+	application (previous three items).</p></li>
+</ul>
+
+<hr/>
+
+
+<a name="dev"></a>
+<h2>JASigning Developer Documentation</h2>
+
+<p>
+There is some rudimentary JASigning
+<a href="./devdoc/index.html">developer's documentation</a>.</p>
+
+<hr/>
+
+<p> Development of the JASigning and CWASA software was supported by the
+EU Framework 7 project Dicta-Sign FP7-ICT-3-231135. </p>
+
+<hr/>
+<p>
+<small>
+Available under the
+<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons BY-NC-ND License</a>. JRWG 2021-01-19
+</small>
+
+</body>
+
+</html>

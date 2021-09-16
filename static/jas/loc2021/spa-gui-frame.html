@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>SiGML Player Applet GUI Frame Body</title>
+
+<script type="text/javascript">
+var SPAGUI=parent.SPAGUI;
+</script>
+
+<style type="text/css">
+#spaguiframebody { margin: 0px; padding: 0px; background-color: #EEE; }
+#ctrlForm {
+	padding: 8px 0px 0px 0px;  text-align: center;  white-space: nowrap; height: 32px;
+}
+#avSelect  { font-family: sans-serif;  font-size: 0.8em;  width: 6em; }
+#fpsSelect { font-family: sans-serif;  font-size: 0.8em;  width: 5em; }
+
+</style>
+
+</head>
+
+
+<body id="spaguiframebody">
+
+<!--  APPLET CONTROLS FORM  -->
+<!--================================================================-->
+<form id="ctrlForm">
+<!-- AVATAR NAME -->
+Avatar:
+<select id="avSelect" onChange="SPAGUI.setAvatar( this.value )" disabled="true">
+<!--
+We don't explicitly specify the initial setting for the avatar menu,
+since the applet should generate an avatar-loaded event, which
+(via our Javascript) should cause the menu to adjust appropriately.
+In each option element the avatar name is duplicated in the value
+attribute - for the benefit of IE 6, which doesn't follow the spec.
+-->
+<script>
+var avoptels = SPAGUI.getAvatarOptionElements();
+for (var av=0; av!=avoptels.length; ++av) {
+	document.write( avoptels[ av ]+"\n" );
+}
+</script>
+</select>
+&nbsp;&nbsp;&nbsp;
+<!-- Sign/Stop BUTTONS -->
+<input type="button" value="Sign" id="bttnSign" disabled="true"
+	onClick="SPAGUI.playSiGML()" />
+<input type="button" value="Stop" id="bttnStop" disabled="true"
+	onClick="SPAGUI.stopPlaySiGML()" />
+&nbsp;&nbsp;&nbsp;
+<!-- Speed Buttons -->
+<input type="button" value="Reset Speed" id="bttnResetSpeed" disabled="true"
+    onClick="SPAGUI.SPA.resetSpeed()" />
+<input type="button" value="-" id="bttnSlower" disabled="true"
+	onClick="SPAGUI.SPA.lowerSpeed()" />
+<input type="button" value="+" id="bttnFaster" disabled="true"
+	onClick="SPAGUI.SPA.raiseSpeed()" />
+
+<br><!--#########################-->
+
+<!-- Animgen FPS -->
+<!-- TBD: sort out initial value -->
+FPS:
+<select id="fpsSelect" onChange="SPAGUI.setAnimgenFPS( this.value )" disabled>
+<script>
+var fpsoptels = SPAGUI.getFPSOptionElements();
+for (var f=0; f!=fpsoptels.length; ++f) {
+	document.write( fpsoptels[ f ] +"\n" );
+}
+</script>
+</select>
+&nbsp;&nbsp;&nbsp;
+<!-- Logging checkboxes -->
+<!-- initial settings ("checked") should match those of the applet arguments
+     "player.do.log.dropped.frames", "do.spa.logging" -->
+Log Dropped Frames:
+<input type="checkbox" value="DoLogDF" id="chkDoLogDroppedFrames"
+	style="vertical-align:-10%"
+	onClick="SPAGUI.SPA.setLogDroppedFramesFlag( this.checked )" />
+&nbsp;&nbsp;&nbsp;
+SPA Logging:
+<input type="checkbox" value="Log" id="chkLog" style="vertical-align:-10%"
+	onClick="SPAGUI.SPA.setLogFlag( this.checked )" />
+
+
+</form>
+<!--================================================================-->
+
+</body>
+
+</html>

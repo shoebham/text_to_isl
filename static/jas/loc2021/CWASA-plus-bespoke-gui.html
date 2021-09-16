@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>CoffeeScript WebGL ARP Signing Avatar: loc.2021</title>
+
+<meta http-equiv="Access-Control-Allow-Origin" content="*">
+<meta http-equiv="Access-Control-Allow-Methods" content="GET">
+
+<!-- CWA @ localhost/jas/loc2021 -->
+
+<link rel="stylesheet"
+    href="http://localhost/jas/loc2021/cwa/cwasa.css" />
+<script type="text/javascript"
+    src="http://localhost/jas/loc2021/cwa/allcsa.js"></script>
+
+</head>
+
+<body onload="CWASA.init();">
+
+<!--================================================================-->
+<h3>CoffeeScript WebGL ARP Signing Avatar with Animgen via JASigning: loc.2021</h3>
+<h4>GUI composed of bespoke elements</h4>
+<hr/>
+
+<table align="center" >
+<tr>
+
+<td align="left" valign="center" width="250" height="280" >
+	<!-- CWA signing avatar 0 -->
+	<div class="CWASAAvatar av0" align="center" ></div>
+</td>
+
+<td></td>
+
+<td align="center" valign="center">
+
+<!--================================================================-->
+<!-- Bespoke signing avatar GUI 0 -->
+<!--================================================================-->
+
+<div class="divCtrlPanel">
+
+<!-- Avatar Menu -->
+Avatar:
+<select class="menuAv av0">
+<option value="anna">anna</option>
+<option value="beatrice">beatrice</option>
+<option value="candy">candy</option>
+<option value="darshan">darshan</option>
+<option value="francoise">francoise</option>
+<option value="genie">genie</option>
+<option value="luna" selected="selected">luna</option>
+<option value="marc">marc</option>
+<option value="max">max</option>
+<option value="monkey">monkey</option>
+<option value="otis">otis</option>
+<option value="robotboy">robotboy</option>
+<option value="siggi">siggi</option>
+</select>
+<br/>
+
+<!-- Speed Buttons -->
+Speed (log<sub>2</sub> scale):
+<input class="txtLogSpeed av0" value="+1.0" type="text" />
+
+<input type="button" value="-" class="bttnSpeedDown av0" />
+<input type="button" value="+" class="bttnSpeedUp av0" />
+<input type="button" value="Reset" class="bttnSpeedReset av0" />
+
+<hr/>
+
+<!-- SiGML URL -->
+SiGML URL:<br>
+<input class="txtSiGMLURL av0" value="welkom-ngt.sigml" type="text" />
+
+<br>
+
+<!-- SiGML Text -->
+SiGML Text:<br>
+<textarea class="txtaSiGMLText av0" rows="4" >
+<?xml version="1.0" encoding="utf-8"?>
+<sigml>
+
+<hns_sign gloss="mug">
+  <hamnosys_nonmanual>
+    <hnm_mouthpicture picture="mVg"/>
+  </hamnosys_nonmanual>
+  <hamnosys_manual>
+    <hamfist/> <hamthumbacrossmod/>
+        <hamextfingerol/> <hampalml/>
+    <hamshoulders/>
+    <hamparbegin/> <hammoveu/> <hamarcu/>
+        <hamreplace/> <hamextfingerul/> <hampalmdl/>
+    <hamparend/>
+  </hamnosys_manual>
+</hns_sign>
+
+<hns_sign gloss="take">
+  <hamnosys_nonmanual>
+    <hnm_mouthpicture picture="te_Ik"/>
+  </hamnosys_nonmanual>
+  <hamnosys_manual>
+    <hamceeall/> <hamextfingerol/> <hampalml/>
+    <hamlrbeside/> <hamshoulders/> <hamarmextended/>
+    <hamreplace/> <hamextfingerl/> <hampalml/>
+    <hamchest/> <hamclose/>
+  </hamnosys_manual>
+</hns_sign>
+
+<hns_sign gloss="i">
+  <hamnosys_nonmanual>
+    <hnm_mouthpicture picture="a_I"/>
+  </hamnosys_nonmanual>
+  <hamnosys_manual>
+    <hamfinger2/> <hamthumbacrossmod/>
+    <hamextfingeril/> <hampalmr/>
+    <hamchest/> <hamtouch/>
+  </hamnosys_manual>
+</hns_sign>
+
+</sigml>
+</textarea>
+
+<br>
+
+<!-- Avatar/Play/Stop BUTTONS -->
+<input type="button" value="Play SiGML URL" class="bttnPlaySiGMLURL av0" />
+<input type="button" value="Play SiGML Text" class="bttnPlaySiGMLText av0" />
+&nbsp;
+<input type="button" value="Stop" class="bttnStop av0" />
+
+<br>
+
+<input value="Suspend" class="bttnSuspend av0" type="button">
+<input value="Resume" class="bttnResume av0" type="button">
+&nbsp;
+Frames:
+<input value="+1" class="bttnNextF av0" type="button">
+<input value="-1" class="bttnPrevF av0" type="button">
+
+<hr/>
+
+<!-- Progress and Status -->
+
+<span style="font-size: 90%;" >
+Sign/Frame:
+<input class="txtSF av0" value="0/0" type="text">
+&nbsp;
+Gloss:
+<input class="txtGloss av0" value="[none]" type="text">
+&nbsp;
+FPS:
+<input class="txtFPS av0" value="00.00" type="text" />
+<br/>
+
+Status:
+<input type="text" class="statusExtra av0" />
+</span>
+
+</div>
+<!--================================================================-->
+
+</td>
+</tr>
+</table>
+
+<hr/>
+This example shows how individual elements of the GUI can be created directly.
+<p>
+The avatar panel is generated automatically, but other buttons and fields are provided explicitly. The class name on each element identifies the type of element and the number of the avatar. Multiple instances of buttons and output fields can be used, but input fields such as the SiGML URL or SiGML Text should occur only once for a given avatar.
+<p>
+Below is second copy of the avatar menu, the frame count, and status line to illustrate duplicated elements.
+<p align="center">
+<span class="CWASAAvMenu av0" ></span><input class="txtSF av0" value="0/0" type="text">
+<br/>
+<input type="text" class="statusExtra av0" />
+
+<hr/>
+<textarea id="JSONText" class="txtaSiGMLText" rows="6" >
+</textarea>
+
+<div class="undisplayed">
+<!-- Animgen FPS -->
+<!--
+Let the Javascript initialisation set the selected FPS value, which should
+match that specified in the applet's "animgen.fps" parameter (above).
+The duplicated information in the value attributes is needed for IE 6,
+which doesn't follow the spec.
+-->
+FPS:&nbsp;
+<select class="fpsmenu" >
+	<option value="10">10</option>
+	<option value="25">25</option>
+	<option value="40">40</option>
+	<option value="50">50</option>
+	<option value="60">60</option>
+	<option value="100">100</option>
+</select>
+
+<br><br>
+
+<!-- Logging checkbox -->
+<!-- initial setting ("checked") should match that of the applet argument
+     "do.spa.logging" -->
+SPA Logging:&nbsp;
+<input type="checkbox" value="Log" class="chkLog" />
+<br>
+Log Dropped Frames:&nbsp;
+<input type="checkbox" value="DoLogDF" class="chkDoLogDroppedFrames" />
+
+<br><br>
+
+</div> <!--class="undisplayed"-->
+
+<!-- Hidden SToCA applet element panel -->
+<!--================================================================-->
+<div class="SToCA" align="center" ></div>
+<!--================================================================-->
+
+<hr/>
+<p>
+<small>
+Available under the
+<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons BY-NC-ND License</a>. JRWG 2021-01-19
+</small>
+</body>
+
+</html>

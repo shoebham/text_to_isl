@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sigml>
+
+<hamgestural_sign gloss="mug">
+  <sign_nonmanual>
+    <mouthing_tier>
+      <mouth_picture picture="mVg"/>
+    </mouthing_tier>
+  </sign_nonmanual>
+  <sign_manual>
+    <handconfig handshape="fist" thumbpos="across"/>
+    <handconfig extfidir="ol"/>
+    <handconfig palmor="l"/>
+    <location_bodyarm location="shoulders"/>
+    <par_motion>
+      <directedmotion direction="u" curve="u"/>
+      <tgt_motion>
+        <changeposture/>
+        <handconfig extfidir="ul" palmor="dl"/>
+      </tgt_motion>
+    </par_motion>
+  </sign_manual>
+</hamgestural_sign>
+
+<hamgestural_sign gloss="take">
+  <sign_nonmanual>
+    <mouthing_tier>
+      <mouth_picture picture="te_Ik"/>
+    </mouthing_tier>
+  </sign_nonmanual>
+  <sign_manual>
+    <handconfig handshape="ceeall"/>
+    <handconfig extfidir="ol"/>
+    <handconfig palmor="l"/>
+    <location_bodyarm location="shoulders" side="left_beside" contact="armextended"/>
+    <tgt_motion>
+      <changeposture/>
+      <handconfig extfidir="l" palmor="l"/>
+      <location_bodyarm location="chest" contact="close"/>
+    </tgt_motion>
+  </sign_manual>
+</hamgestural_sign>
+
+<hamgestural_sign gloss="i">
+  <sign_nonmanual>
+    <mouthing_tier>
+      <mouth_picture picture="a_I"/>
+    </mouthing_tier>
+  </sign_nonmanual>
+  <sign_manual>
+    <handconfig handshape="finger2" thumbpos="across"/>
+    <handconfig extfidir="il"/>
+    <handconfig palmor="r"/>
+    <location_bodyarm location="chest" contact="touch"/>
+  </sign_manual>
+</hamgestural_sign>
+
+</sigml>

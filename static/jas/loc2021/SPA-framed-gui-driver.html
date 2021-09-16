@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Driver Frame for SPA with GUI Frame</title>
+
+<script type="text/javascript" src="scripts/SPA-framed-gui-driver.js"></script>
+
+<style type="text/css">
+#spadriverbody { margin: 0px; padding: 4px; background-color: #EEE; }
+#urlText       { font-family: sans-serif;  font-size: 0.8em;  width: 100%; }
+#sigmlText     { font-family: monospace;  font-size: 0.9em; width: 100%; }
+p.sigmllabel   { margin: 0px; padding: 0px 0px 2px; text-align:left; }
+p.sigmlbutton  { margin: 0px; padding: 4px 0px 0px; text-align: right; }
+</style>
+</head>
+
+
+<body id="spadriverbody"
+	onload="SPAGUIDRIVER.initialise()" onunload="SPAGUIDRIVER.terminate()"
+>
+
+<form id="spasigmlform">
+
+<!-- SiGML URL -->
+<!--================================================================-->
+<div>
+<p class="sigmllabel">SiGML URL:</p>
+
+<input type="text" id="urlText" class="widefield"
+	onKeyPress="SPAGUIDRIVER.handleURLKey( event )"
+	value="sigml/scotland-H.sigml" />
+
+<p class="sigmlbutton">
+<input type="button" value="Play URL" id="bttnPlayURL" disabled="true"
+	onClick="SPAGUIDRIVER.playSiGMLURL()" /></p>
+</div>
+<!--================================================================-->
+
+
+<!-- SiGML Text -->
+<!--================================================================-->
+<div>
+<p class="sigmllabel">SiGML Text:</p>
+
+<textarea id="sigmlText" rows="14">
+<?xml version="1.0" encoding="utf-8"?>
+<sigml>
+
+<hns_sign gloss="mug">
+  <hamnosys_nonmanual>
+    <hnm_mouthpicture picture="mVg"/>
+  </hamnosys_nonmanual>
+  <hamnosys_manual>
+    <hamfist/> <hamthumbacrossmod/>
+        <hamextfingerol/> <hampalml/>
+    <hamshoulders/>
+    <hamparbegin/> <hammoveu/> <hamarcu/>
+        <hamreplace/> <hamextfingerul/> <hampalmdl/>
+    <hamparend/>
+  </hamnosys_manual>
+</hns_sign>
+
+<hns_sign gloss="take">
+  <hamnosys_nonmanual>
+    <hnm_mouthpicture picture="te_Ik"/>
+  </hamnosys_nonmanual>
+  <hamnosys_manual>
+    <hamceeall/> <hamextfingerol/> <hampalml/>
+    <hamlrbeside/> <hamshoulders/> <hamarmextended/>
+    <hamreplace/> <hamextfingerl/> <hampalml/>
+    <hamchest/> <hamclose/>
+  </hamnosys_manual>
+</hns_sign>
+
+<hns_sign gloss="i">
+  <hamnosys_nonmanual>
+    <hnm_mouthpicture picture="a_I"/>
+  </hamnosys_nonmanual>
+  <hamnosys_manual>
+    <hamfinger2/> <hamthumbacrossmod/>
+    <hamextfingeril/> <hampalmr/>
+    <hamchest/> <hamtouch/>
+  </hamnosys_manual>
+</hns_sign>
+
+</sigml>
+</textarea>
+
+<!--================================================================-->
+
+</form>
+
+</body>
+
+</html>

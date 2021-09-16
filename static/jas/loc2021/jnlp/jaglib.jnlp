@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp codebase="http://localhost/jas/loc2021/"
+    href="jnlp/jaglib.jnlp">
+
+  <information>
+    <title>JAGLib</title>
+    <vendor>JASigning loc.2021</vendor>
+    <description>Java Animgen Native Library</description>
+    <offline-allowed />
+  </information>
+
+  <security>
+    <all-permissions />
+  </security>
+
+  <update check="always" policy="always" />
+
+  <resources>
+    <jar href="jars/jnlp/jaglib.jar" main="true" />
+  </resources>
+
+  <resources os="Mac OS X" arch="i386">
+    <nativelib href = "jaglib/jaglib-native-macosx-i386.jar" />
+  </resources>
+
+  <resources os="Mac OS X" arch="x86_64">
+    <nativelib href = "jaglib/jaglib-native-macosx-x86_64.jar" />
+  </resources>
+
+  <resources os="Windows" arch="x86">
+    <nativelib href = "jaglib/jaglib-native-windows-x86.jar" />
+  </resources>
+
+  <resources os="Windows" arch="x86_64">
+    <nativelib href = "jaglib/jaglib-native-windows-x86_64.jar" />
+  </resources>
+
+  <resources os="Windows" arch="amd64">
+    <nativelib href = "jaglib/jaglib-native-windows-x86_64.jar" />
+  </resources>
+
+  <component-desc />
+</jnlp>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sigml
+    base_uri="http://localhost/jas/loc2021/sigml/">
+
+<signing_ref
+    uri="scotland-H.sigml"
+    format="SiGML"  compressed="no"/>
+
+<signing_ref
+    uri="scotland-H.sigml"
+    format="SiGML"  compressed="no"/>
+
+</sigml>

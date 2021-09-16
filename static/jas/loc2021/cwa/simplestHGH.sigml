@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sigml>
+  <hns_sign gloss="simple 1">
+	<hamnosys_manual>
+	  <hamfist/><hamextfingerol/><hampalml/>
+	</hamnosys_manual>
+  </hns_sign>
+  <hamgestural_sign gloss="simple 2">
+    <sign_manual>
+      <handconfig handshape="fist"/>
+      <handconfig extfidir="ol"/>
+      <handconfig palmor="l"/>
+    </sign_manual>
+  </hamgestural_sign>
+  <hns_sign gloss="simple 3">
+	<hamnosys_manual>
+	  <hamfist/><hamextfingerol/><hampalml/>
+	</hamnosys_manual>
+  </hns_sign>
+</sigml>

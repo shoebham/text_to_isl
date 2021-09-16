@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0+"
+    codebase="http://localhost/jas/loc2021/"
+    href="jnlp/SiGMLServicePlayer-rnid.jnlp">
+
+  <information>
+    <title>SiGML Service Player (for RNID)</title>
+    <vendor>JASigning loc.2021</vendor>
+    <homepage href="jnlp/index.html" />
+    <description>Plays SiGML delivered via a TCP/IP socket (for RNID).</description>
+	<icon href="anna.png" />
+    <offline-allowed />
+    <shortcut online="false">  <desktop />  </shortcut>
+  </information>
+
+  <security>  <all-permissions />  </security>
+
+  <update check="always" policy="always" />
+
+  <resources os="Mac OS X">
+    <property name="apple.laf.useScreenMenuBar" value="true" />
+  </resources>
+
+  <resources os="Windows">
+    <property name="sun.java2d.noddraw" value="true" />
+  </resources>
+
+  <resources>
+    <j2se version="1.5+" initial-heap-size="96m" max-heap-size="256m" />
+
+    <jar href="jars/jnlp/SiGMLServicePlayer-rnid.jar" main="true" />
+    <jar href="jars/use-jarp.jar" />
+    <jar href="jars/jarpb.jar" />
+    <jar href="jars/sigmlinlib.jar" />
+    <jar href="jars/antlr-3.5.2-complete.jar" />
+    <jar href="jars/avatars/avatar-basic.jar" />
+    <jar href="jars/log4j-api-2.3.jar" />
+    <jar href="jars/log4j-core-2.3.jar" />
+    
+    <extension name="jaglib" href="jnlp/jaglib.jnlp" />
+    <extension name="jogl-all-awt" href="jnlp/jogl-all-awt.jnlp" />
+    
+    <property name="sun.java2d.noddraw" value="true" />
+    <property name="log4j.configurationFile" value="http://localhost/jas/loc2021/log4j2.xml" />
+
+  </resources>
+
+  <application-desc main-class="app.JASiGMLPlayer">
+    <argument>-session</argument>
+    <argument>http://localhost/jas/loc2021/JASiGMLPlayer-rnid</argument>
+    <argument>-ja.version.tag=loc2021</argument>
+    <argument>-ja.remote.base.url=http://localhost/jas/loc2021/</argument>
+    <argument>-ja.force.remote.ja.home=true</argument>
+    <argument>-ja.msvc.version.for.jaglib=2010</argument>
+  </application-desc>
+</jnlp>

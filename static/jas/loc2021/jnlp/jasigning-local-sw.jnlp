@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp codebase="http://localhost/jas/loc2021/"
+    href="jnlp/jasigning-local.jnlp">
+
+  <information>
+    <title>JASigning Support</title>
+    <vendor>JASigning loc.2021</vendor>
+    <description>Classes and Native Libraries for JASigning
+		Apps and Applets</description>
+    <offline-allowed />
+  </information>
+
+  <security>  <all-permissions />  </security>
+
+  <update check="always" policy="always" />
+
+  <resources>
+    <jar href="jars/siwiki.jar" />
+    <jar href="jars/hns-convert.jar" />
+    <jar href="jars/use-jarp.jar" />
+    <jar href="jars/jarpb.jar" />
+    <extension name="sigmlinlib"
+		href="http://localhost/jas/loc2021/jnlp/sigmlinlib.jnlp" />
+    <extension name="jaglib"
+		href="http://localhost/jas/loc2021/jnlp/jaglib.jnlp" />
+    <extension name="jogl-local"
+		href="http://localhost/jas/loc2021/jnlp/jogl-local.jnlp" />
+    <extension name="avatar-basic"
+		href="http://localhost/jas/loc2021/jnlp/avatars/avatar-basic.jnlp" />
+  </resources>
+
+  <component-desc />
+</jnlp>

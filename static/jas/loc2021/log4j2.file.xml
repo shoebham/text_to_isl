@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+	<CustomLevels>
+		<CustomLevel name="STATS" intLevel="420" />
+		<CustomLevel name="LOG" intLevel="440" />
+	</CustomLevels>
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %-7marker:  %msg  [%t %logger{36}]%n"/>
+			<Filters>
+				<MarkerFilter marker="SESSION" onMatch="NEUTRAL" onMismatch="NEUTRAL"/>
+				<MarkerFilter marker="THREAD" onMatch="NEUTRAL" onMismatch="NEUTRAL"/>
+				<MarkerFilter marker="CACHE" onMatch="NEUTRAL" onMismatch="NEUTRAL"/>
+				<MarkerFilter marker="SCRIPT" onMatch="NEUTRAL" onMismatch="NEUTRAL"/>
+				<MarkerFilter marker="COMMAND" onMatch="NEUTRAL" onMismatch="NEUTRAL"/>
+				<MarkerFilter marker="EVENT" onMatch="NEUTRAL" onMismatch="NEUTRAL"/>
+				<MarkerFilter marker="GUI" onMatch="NEUTRAL" onMismatch="NEUTRAL"/>
+				<MarkerFilter marker="CONTROL" onMatch="NEUTRAL" onMismatch="NEUTRAL"/>
+				<MarkerFilter marker="SIGML" onMatch="NEUTRAL" onMismatch="NEUTRAL"/>
+				<MarkerFilter marker="AVATAR" onMatch="NEUTRAL" onMismatch="NEUTRAL"/>
+				<MarkerFilter marker="CAMERA" onMatch="NEUTRAL" onMismatch="NEUTRAL"/>
+				<MarkerFilter marker="ANIMGEN" onMatch="NEUTRAL" onMismatch="NEUTRAL"/>
+				<MarkerFilter marker="VIDEO" onMatch="NEUTRAL" onMismatch="NEUTRAL"/>
+				<MarkerFilter marker="RENDER" onMatch="NEUTRAL" onMismatch="NEUTRAL"/>
+				<MarkerFilter marker="SYNC" onMatch="NEUTRAL" onMismatch="NEUTRAL"/>
+				<MarkerFilter marker="SIGN" onMatch="NEUTRAL" onMismatch="NEUTRAL"/>
+				<MarkerFilter marker="FRAME" onMatch="DENY" onMismatch="NEUTRAL"/>
+				<MarkerFilter marker="PHASE" onMatch="DENY" onMismatch="NEUTRAL"/>
+				<MarkerFilter marker="ANTLR" onMatch="DENY" onMismatch="NEUTRAL"/>
+	      		<ThresholdFilter level="ALL" onMatch="NEUTRAL" onMismatch="DENY"/>
+			</Filters>
+		</Console>
+		<File name="LogFile" fileName="/tmp/JASigning.log.${date:MM-dd.kk-mm}.txt">
+      		<PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %-7marker:  %msg  [%t %logger{36}]%n"/>
+			<Filters>
+				<MarkerFilter marker="EVENT" onMatch="NEUTRAL" onMismatch="NEUTRAL"/>
+      			<ThresholdFilter level="ALL" onMatch="NEUTRAL" onMismatch="DENY"/>
+			</Filters>
+		</File>
+	</Appenders>
+	<Loggers>
+		<Root level="ALL">
+			<AppenderRef ref="LogFile"/>
+			<AppenderRef ref="Console"/>
+		</Root>
+	</Loggers>
+</Configuration> 

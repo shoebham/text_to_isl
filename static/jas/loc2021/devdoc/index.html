@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>JASigning Developer Documentation</title>
+
+<!--
+<link rel="stylesheet" type="text/css" href="WHATEVER.css">
+-->
+<style type="text/css">
+h1,h2,h3 { color: navy }
+</style>
+
+</head>
+
+<body>
+<h2>JASigning Developer Documentation</h2>
+
+<hr>
+
+<p>
+As well as supporting avatar definitions, configuration data, etc.,
+JASigning consists of three Java modules and a native library:
+
+<ul>
+<li><code>sigmlinlib</code> (Java)<br>
+    Input and translation of SiGML data;</li>
+<li><code>jarp</code> (Java)<br>
+    Basic avatar animation, and signing avatar management;</li>
+<li><code>use-jarp</code> (Java)<br>
+    Standard apps and applets for <code>jarpb</code>;</li>
+<li><code>jaglib</code> (<code>animgen</code> native library)<br>
+    Generates avatar animation data from SiGML.</li>
+</ul></p>
+
+<p>
+In addition to the standard Java 2 platform,
+JASigning depends on three externally developed libraries:
+<a href="http://www.antlr.org/">ANTLR</a> (parser generation library),
+<a href="https://jogl.dev.java.net/">JOGL</a> (OpenGL interface library), and
+<a href="http://www.jclark.com/xml/expat.html">expat</a> (XML parsing library).
+</p>
+
+<p>
+The currently available documentation can be downloaded as ZIP archives:
+
+<ul>
+<li><code>sigmlinlib</code> <a href="./javadoc-sigmlinlib.zip">javadoc</a></li>
+<li><code>jarpb</code> <a href="./javadoc-jarpb.zip">javadoc</a></li>
+<li><code>use-jarp</code> <a href="./javadoc-use-jarp.zip">javadoc</a></li>
+<li><code>use-jarp</code> <a href="./use-jarp-source.zip">source code</a>.</li>
+</ul>
+</p>
+
+<p>
+A version of JASigning is available for installation on a localhost server. The installation
+includes a NetBeans project for building freestanding apps using <code>use-jarp</code>.
+See <a href="http://vh.cmp.uea.ac.uk/index.php/JASigning">JASigning</a>.
+</p>
+
+<hr>
+<p>
+[<a href="../index.html">Back</a> to the main JASigning page.]
+
+<hr>
+<small><em>JRWG &nbsp;&nbsp; 2015-05-24</em></small>
+
+</body>
+
+</html>

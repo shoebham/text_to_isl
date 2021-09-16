@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>SiGML Player Applet with GUI Frame Frameset</title>
+
+<script type="text/javascript" src="scripts/spa-params.js"></script>
+<script type="text/javascript" src="scripts/spa-host-for-gui.js"></script>
+<script type="text/javascript" src="scripts/spa-gui.js"></script>
+
+<script type="text/javascript">
+HTML_PARAMETERS = {
+//	initialFPSStr    : "25",
+	spaWidth         : "92%",
+	spaHeight        : "100%"
+};
+if (typeof parent.HTML_PARAMETERS === "object") {
+	function copyParentParams( pparams ) {
+		for (var pp in pparams) {
+			if (pparams.hasOwnProperty( pp )) {
+				HTML_PARAMETERS[ pp ] = pparams[ pp ];
+			}
+		}
+	}
+	copyParentParams( parent.HTML_PARAMETERS );
+}
+// NB The following call needs to happen before the SPA proxy is created by
+// the spaframe's spa-proxy.js script.  So, for example, doing it in response
+// to the frameset's onload event would be too late.
+SPAGUI.updateParams( HTML_PARAMETERS );
+</script>
+
+</head>
+
+<frameset rows="*,68px" cols="*" border="0"
+	onload="SPAGUI.initialise()" onunload="SPAGUI.terminate()"
+>
+	<frame src="spa-frame.html" name="spaframe" id="spaframe"
+		frameborder="0" scrolling="no" noresize
+	>
+	<frame src="spa-gui-frame.html" name="spaguiframe" id="spaguiframe"
+		frameborder="0" scrolling="no" noresize
+	>
+</frameset>
+
+</html>

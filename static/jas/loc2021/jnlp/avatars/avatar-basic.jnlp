@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp codebase="http://localhost/jas/loc2021/"
+    href="jnlp/avatars/avatar-basic.jnlp">
+
+  <information>
+    <title>Avatar Data - basic</title>
+    <vendor>JASigning loc.2021</vendor>
+    <description>JASigning Avatar Data JAR - basic (anna and COMMON)</description>
+    <offline-allowed />
+  </information>
+
+  <security>  <all-permissions />  </security>
+
+  <update check="always" policy="always" />
+
+  <resources>
+    <jar href="jars/avatars/avatar-basic.jar" />
+  </resources>
+
+  <component-desc />
+</jnlp>

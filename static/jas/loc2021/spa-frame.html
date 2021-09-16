@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>SiGML Player Applet Frame Body</title>
+
+<script type="text/javascript" src="scripts/spa-proxy.js"></script>
+
+<style type="text/css">
+#spaframebody { margin: 0px; padding: 8px 8px 4px 4px; background-color: #EEE; }
+#spaboundary  { margin: 0px; padding: 0px; text-align: center; }
+#spApplet     { border: 2px #88C groove; }
+</style>
+
+</head>
+
+
+<body id="spaframebody"
+	onload="SPA.initialise( document.spApplet )"  onunload="SPA.terminate()">
+
+<!--  APPLET  -->
+<!--================================================================-->
+<div id="spaboundary">
+
+<script>
+// If we write the applet tag dynamically, then currently under Safari on
+// Mac OS X the resulting applet is unable to obtain its window object via
+// LiveScript.
+// So we have to write the applet tag explicitly.  This has the disadvantage
+// of preventing us from passing the applet width and height values defined
+// by the environment through to the applet tag.
+
+var ENV_DATA = {
+	extraavsstr : SPA.HOST.param( "extraAvatarsText" ),
+	rgbstr      : SPA.HOST.param( "backgroundRGB" ),
+	width       : SPA.HOST.param( "spaWidth" ),    //########
+	height      : SPA.HOST.param( "spaHeight" ),   //########
+	initav      : SPA.HOST.param( "initialAvatar" ),
+	initfpsstr  : SPA.HOST.param( "initialFPSStr" ),
+	params      : { }
+};
+ENV_DATA.params[ "avatar.id" ]   = ENV_DATA.initav;
+ENV_DATA.params[ "animgen.fps" ] = ENV_DATA.initfpsstr;
+if (ENV_DATA.extraavsstr) {
+	ENV_DATA.params[ "avatar.id.list" ]        = ENV_DATA.extraavsstr;
+	ENV_DATA.params[ "cacheable.avatar.list" ] = ENV_DATA.extraavsstr;
+}
+if (ENV_DATA.rgbstr) {
+	ENV_DATA.params[ "background.rgb" ] = ENV_DATA.rgbstr;
+}
+</script>
+
+<!--
+This applet element tries to run the SPA directly as a JNLP applet - via
+its final parameter, named "jnlp_href".  If JNLP applets are not supported
+(2010-05: currently the case on Mac OS X) then our local copy of Sun's
+JNLP Applet Launcher applet is used instead: this runs the SPA as its
+sub-applet.
+The supporting script file, spa-proxy.js, has the responsibility
+of working out which of these two scenarios is in play.
+-->
+<applet name="sigmlplayerapplet"  id="spApplet"  class="avapplet"
+    	codebase="/jas/loc2021/"
+    	code="app.SiGMLPlayerApplet"
+    	width="336"  height="336" mayscript>
+    <param name="jnlp_href" value="jnlp/spa.jnlp" />
+
+<!--################-->
+<script>
+// This is how we get the parameter values specified by the enclosing frames
+// through to the applet.
+spaWriteAppletParams( ENV_DATA.params );
+</script>
+<!--################-->
+
+</applet>
+</div>
+<!--================================================================-->
+
+</body>
+
+</html>
