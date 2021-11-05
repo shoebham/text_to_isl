@@ -253,6 +253,7 @@ def reorder_eng_to_isl(input_string):
 	parser = StanfordParser()
 	# Generates all possible parse trees sort by probability for the sentence
 	possible_parse_tree_list = [tree for tree in parser.parse(input_string)]
+	print("i am testing this",possible_parse_tree_list)
 	# Get most probable parse tree
 	parse_tree = possible_parse_tree_list[0]
 	# print(parse_tree)
