@@ -31,5 +31,7 @@ The project uses SIGML files for animating the words and they may not be accurat
 
 ## Credits
 Word reordering and stanford parser download logic: -  https://github.com/sahilkhoslaa/AudioToSignLanguageConverter
-http://islfromtext.in/avatarfinal.php
+
+https://github.com/human-divanshu/Text-to-Sign-Language
+
 SIGML player: - https://vh.cmp.uea.ac.uk/index.php/CWA_Signing_Avatars
