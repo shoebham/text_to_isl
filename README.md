@@ -2,6 +2,8 @@
 
 A Summer project that will translate your text to Indian sign Language animations
 
+# Demo
+![demo](demo.gif)
 ## Tech used
 
 - Python
