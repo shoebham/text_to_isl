@@ -20,7 +20,7 @@ from flask import Flask,request,render_template,send_from_directory,jsonify
 
 app =Flask(__name__,static_folder='static', static_url_path='')
 
-import stanza
+# import stanza
 # from stanza.server import CoreNLPClient
 import pprint 
 

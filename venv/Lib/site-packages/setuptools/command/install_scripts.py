@@ -1,9 +1,11 @@
 from distutils import log
 import distutils.command.install_scripts as orig
+from distutils.errors import DistutilsModuleError
 import os
 import sys
 
-from pkg_resources import Distribution, PathMetadata, ensure_directory
+from pkg_resources import Distribution, PathMetadata
+from .._path import ensure_directory
 
 
 class install_scripts(orig.install_scripts):
@@ -35,7 +37,7 @@ class install_scripts(orig.install_scripts):
         try:
             bw_cmd = self.get_finalized_command("bdist_wininst")
             is_wininst = getattr(bw_cmd, '_is_running', False)
-        except ImportError:
+        except (ImportError, DistutilsModuleError):
             is_wininst = False
         writer = ei.ScriptWriter
         if is_wininst:
