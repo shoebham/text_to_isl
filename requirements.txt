@@ -14,7 +14,7 @@ Jinja2==3.0.1
 joblib==1.0.1
 MarkupSafe==2.0.1
 murmurhash==1.0.5
-nltk==3.6.2
+nltk==3.6.6
 numpy==1.21.2
 packaging==21.0
 pathy==0.6.0
