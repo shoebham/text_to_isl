@@ -10,7 +10,7 @@ Flask==2.0.1
 idna==3.2
 itsdangerous==2.0.1
 Jinja2==3.0.1
-joblib==1.0.1
+joblib==1.2.0
 MarkupSafe==2.0.1
 murmurhash==1.0.5
 nltk==3.6.2
