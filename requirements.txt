@@ -37,5 +37,5 @@ typer==0.3.2
 typing-extensions==3.10.0.2
 urllib3==1.26.6
 wasabi==0.8.2
-Werkzeug==2.0.1
+Werkzeug==2.2.3
 yarg==0.1.9
