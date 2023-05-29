@@ -22,6 +22,7 @@ Install the dependencies and start the server.
 
 ```sh
 pip install -r requirements.txt
+pip install spacy
 python main.py
 ```
 After running ```main.py``` stanford parser will be downloaded 
