@@ -4,6 +4,7 @@ A Summer project that will translate your text to Indian sign Language animation
 
 # Demo
 ![demo](demo.gif)
+
 ## Tech used
 
 - Python
@@ -13,6 +14,12 @@ A Summer project that will translate your text to Indian sign Language animation
 - [Nltk](https://www.nltk.org/)
 - [Stanford Parser](https://nlp.stanford.edu/software/lex-parser.shtml)
 - [SIGML](https://vh.cmp.uea.ac.uk/index.php/SiGML)
+
+## UPDATE
+Stanford Parser is no longer accessible so please download this [zip](https://drive.google.com/file/d/1lEafb759ZbA33VNvwZOr0fznhtC4Kf4P/view)
+and paste it where your main.py is.
+And set JAVA_HOME environment variable and add %JAVA_HOME%\bin in your path variable 
+refer [this](https://github.com/shoebham/text_to_isl/issues/11) for more clarity.
 
 
 ## Installation
@@ -25,6 +32,8 @@ pip install -r requirements.txt
 pip install spacy
 python main.py
 ```
+
+
 After running ```main.py``` stanford parser will be downloaded 
 you may run into some errors related to classpath of java, google them they shouldn't be so hard to fix 
 Open the browser and go to http://127.0.0.1:5000/  and see the project in action.
