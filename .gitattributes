@@ -31,3 +31,5 @@ stanza_resources/en/pretrain/conll17.pt filter=lfs diff=lfs merge=lfs -text
 stanza_resources/en/sentiment/sstplus.pt filter=lfs diff=lfs merge=lfs -text
 stanza_resources/en/forward_charlm/1billion.pt filter=lfs diff=lfs merge=lfs -text
 stanza_resources/** filter=lfs diff=lfs merge=lfs -text
+stanford-parser-full-2018-10-17/* filter=lfs diff=lfs merge=lfs -text
+stanford-parser-full-2018-10-17/** filter=lfs diff=lfs merge=lfs -text
