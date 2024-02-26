@@ -15,6 +15,15 @@ A Summer project that will translate your text to Indian sign Language animation
 - [Stanford Parser](https://nlp.stanford.edu/software/lex-parser.shtml)
 - [SIGML](https://vh.cmp.uea.ac.uk/index.php/SiGML)
 
+
+## UPDATE 26th Feb 2024
+ I have added a dockerfile, now you can run this project in docker without worrying about errors.
+ Steps:
+ - Download docker and start it
+ - run ```sh 
+ docker compose build
+ docker compose up
+ ``
 ## UPDATE
 Stanford Parser is no longer accessible so please download this [zip](https://drive.google.com/file/d/1lEafb759ZbA33VNvwZOr0fznhtC4Kf4P/view)
 and paste it where your main.py is.
