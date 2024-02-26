@@ -2,6 +2,7 @@ import json
 import os
 # from nltk.parse import stanford
 import stanza 
+stanza.download('en',model_dir='stanza_resources')
 # stanza.install_corenlp()
 # from nltk.stem import WordNetLemmatizer
 # from nltk.tokenize import word_tokenize
@@ -340,7 +341,7 @@ def print_lists():
 	pprint.pprint(word_list)
 	print("--------------------Final Words------------------------");
 	pprint.pprint(final_words);
-	print("---------------Final sentence with letters--------------");
+	print("---------------Final sentence with letters--------------")
 	pprint.pprint(final_output_in_sent)
 
 # clears all the list after completing the work
@@ -379,6 +380,12 @@ def flask_test():
 			final_words_dict[i]=word;
 
 	print("---------------Final words dict--------------");
+
+	for key in final_words_dict.keys():
+		if len(final_words_dict[key])==1:
+			final_words_dict[key]=final_words_dict[key].upper()
+	print(final_words_dict)
+
 	print(final_words_dict)
 
 	return final_words_dict;
@@ -392,4 +399,4 @@ def serve_signfiles(path):
 
 
 if __name__=="__main__":
-	app.run(debug=True)
+    app.run(host='0.0.0.0')

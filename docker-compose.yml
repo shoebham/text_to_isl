@@ -1,0 +1,11 @@
+version:  "3.7"
+
+services:
+  text_to_isl:
+    container_name: text_to_isl
+    image: shoebham/text_to_isl
+    ports:
+      - "8080:5000"
+    build:
+      context: .
+      dockerfile: Dockerfile
