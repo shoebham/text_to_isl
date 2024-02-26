@@ -25,6 +25,8 @@ A Summer project that will translate your text to Indian sign Language animation
  docker compose build 
  docker compose up
  ```
+ - Now it should be running. 
+ - you can access the project on localhost:8080 when running with docker
 ## UPDATE
 Stanford Parser is no longer accessible so please download this [zip](https://drive.google.com/file/d/1lEafb759ZbA33VNvwZOr0fznhtC4Kf4P/view)
 and paste it where your main.py is.
