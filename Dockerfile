@@ -11,7 +11,9 @@ WORKDIR /root
 COPY requirements.txt .
 COPY . .
 # Install dependencies from requirements.txt
+
 RUN pip install --upgrade pip setuptools wheel
+RUN pip install spacy
 RUN pip install -r requirements.txt
 
 # Copy the stanza_resources directory into the container
