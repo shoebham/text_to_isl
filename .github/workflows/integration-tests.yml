@@ -20,34 +20,46 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          lfs: true
-
-      - name: Verify Git LFS assets pulled
-        run: |
-          set -euo pipefail
-          if [ ! -f stanford-parser-full-2018-10-17.jar ]; then
-            echo "Missing stanford-parser-full-2018-10-17.jar"
-            exit 1
-          fi
-          # LFS pointer files start with "version https://git-lfs.github.com/spec/v1"
-          if head -1 stanford-parser-full-2018-10-17.jar | grep -q "git-lfs"; then
-            echo "stanford-parser jar is still an LFS pointer; running git lfs pull..."
-            git lfs install
-            git lfs pull
-          fi
-          jar_size=$(wc -c < stanford-parser-full-2018-10-17.jar | tr -d ' ')
-          echo "Jar size: ${jar_size} bytes"
-          if [ "$jar_size" -lt 1000 ]; then
-            echo "Jar still too small after LFS pull"
-            exit 1
-          fi
 
       - name: Set up Java (required by Stanford Parser / NLTK)
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '11'
+
+      - name: Download and extract Stanford Parser
+        run: |
+          set -euo pipefail
+          # Parser is no longer committed (see main / .gitignore); fetch at CI runtime
+          # main.py expects either the extracted dir or a .jar zip beside main.py
+          if [ ! -d stanford-parser-full-2018-10-17 ]; then
+            echo "Downloading stanford-parser-full-2018-10-17.zip..."
+            curl -fsSL -o stanford-parser-full-2018-10-17.jar \
+              "https://nlp.stanford.edu/software/stanford-parser-full-2018-10-17.zip"
+            jar_size=$(wc -c < stanford-parser-full-2018-10-17.jar | tr -d ' ')
+            echo "Downloaded zip size: ${jar_size} bytes"
+            if [ "$jar_size" -lt 1000000 ]; then
+              echo "Download looks too small; aborting"
+              exit 1
+            fi
+            python - <<'PY'
+          import os, zipfile
+          base = os.getcwd()
+          zpath = os.path.join(base, "stanford-parser-full-2018-10-17.jar")
+          with zipfile.ZipFile(zpath) as z:
+              z.extractall(path=base)
+          models_jar = os.path.join(base, "stanford-parser-full-2018-10-17", "stanford-parser-3.9.2-models.jar")
+          models_dir = os.path.join(base, "stanford-parser-full-2018-10-17")
+          model_target = os.path.join(models_dir, "edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz")
+          if not os.path.exists(model_target):
+              with zipfile.ZipFile(models_jar) as z:
+                  z.extractall(path=models_dir)
+          print("stanford parser extracted; model exists:", os.path.exists(model_target))
+          PY
+          else
+            echo "stanford-parser-full-2018-10-17 already present"
+          fi
+          test -f stanford-parser-full-2018-10-17/edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz
 
       - name: Set up Python
         uses: actions/setup-python@v5
