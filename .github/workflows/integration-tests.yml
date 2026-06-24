@@ -1,0 +1,79 @@
+name: Integration Tests
+
+on:
+  push:
+    branches: [main, add-integration-tests, '**']
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: integration-tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  app-integration:
+    name: App files + server + text output
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Verify Git LFS assets pulled
+        run: |
+          set -euo pipefail
+          if [ ! -f stanford-parser-full-2018-10-17.jar ]; then
+            echo "Missing stanford-parser-full-2018-10-17.jar"
+            exit 1
+          fi
+          # LFS pointer files start with "version https://git-lfs.github.com/spec/v1"
+          if head -1 stanford-parser-full-2018-10-17.jar | grep -q "git-lfs"; then
+            echo "stanford-parser jar is still an LFS pointer; running git lfs pull..."
+            git lfs install
+            git lfs pull
+          fi
+          jar_size=$(wc -c < stanford-parser-full-2018-10-17.jar | tr -d ' ')
+          echo "Jar size: ${jar_size} bytes"
+          if [ "$jar_size" -lt 1000 ]; then
+            echo "Jar still too small after LFS pull"
+            exit 1
+          fi
+
+      - name: Set up Java (required by Stanford Parser / NLTK)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '11'
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+          cache: pip
+
+      - name: Install Python dependencies
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip setuptools wheel
+          # Pin spaCy to a release that still supports Python 3.9 (used by Dockerfile/app)
+          pip install "spacy>=3.7,<3.8"
+          # CPU torch only in CI (faster install); keep <2.6 for stanza checkpoint loading
+          pip install "torch>=2.0,<2.6" --index-url https://download.pytorch.org/whl/cpu
+          pip install -r requirements.txt
+          # Stanza may use spaCy tokenizer; ensure a lightweight English model is available
+          python -m spacy download en_core_web_sm || true
+
+      - name: Run integration tests
+        env:
+          PORT: '5055'
+          IT_SERVER_START_TIMEOUT: '900'
+          IT_REQUEST_TIMEOUT: '300'
+          IT_TEST_INPUT: 'Hello world'
+          PYTHONUNBUFFERED: '1'
+        run: |
+          set -euo pipefail
+          python tests/integration/test_app_running.py

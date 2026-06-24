@@ -399,4 +399,5 @@ def serve_signfiles(path):
 
 
 if __name__=="__main__":
-    app.run(host='0.0.0.0')
+    # PORT env var lets CI/integration tests avoid conflicts (e.g. macOS AirPlay on 5000)
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', '5000')))
