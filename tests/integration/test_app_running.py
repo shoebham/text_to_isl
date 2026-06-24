@@ -77,19 +77,51 @@ def test_required_files_exist() -> None:
     log(f"All required files present ({len(sign_files)} sigml files, jar={jar_size} bytes)")
 
 
-def wait_for_server(url: str, timeout: int, proc: subprocess.Popen | None = None) -> None:
+def _drain_proc_stdout(proc: subprocess.Popen | None, collected: list[str]) -> None:
+    """Non-blocking-ish read of any available stdout lines into collected."""
+    if proc is None or proc.stdout is None:
+        return
+    import select
+
+    try:
+        while True:
+            ready, _, _ = select.select([proc.stdout], [], [], 0)
+            if not ready:
+                break
+            line = proc.stdout.readline()
+            if not line:
+                break
+            collected.append(line)
+            # Mirror server output in IT logs for CI debugging
+            print(line, end="", flush=True)
+    except Exception:
+        pass
+
+
+def wait_for_server(
+    url: str,
+    timeout: int,
+    proc: subprocess.Popen | None = None,
+    log_buf: list[str] | None = None,
+) -> None:
     deadline = time.time() + timeout
     last_err = None
+    log_buf = log_buf if log_buf is not None else []
     while time.time() < deadline:
+        _drain_proc_stdout(proc, log_buf)
         if proc is not None and proc.poll() is not None:
-            tail = ""
+            _drain_proc_stdout(proc, log_buf)
             if proc.stdout:
                 try:
-                    tail = proc.stdout.read() or ""
+                    rest = proc.stdout.read() or ""
+                    if rest:
+                        log_buf.append(rest)
+                        print(rest, end="", flush=True)
                 except Exception:
                     pass
+            tail = "".join(log_buf)[-6000:]
             raise IntegrationTestError(
-                f"Server process exited early with code {proc.returncode}. Output tail:\n{tail[-4000:]}"
+                f"Server process exited early with code {proc.returncode}. Output tail:\n{tail}"
             )
         try:
             req = urllib.request.Request(url, headers={"User-Agent": "text-to-isl-it/1.0"})
@@ -100,15 +132,14 @@ def wait_for_server(url: str, timeout: int, proc: subprocess.Popen | None = None
                         log(f"Server is up at {url}")
                         return
         except urllib.error.HTTPError as exc:
-            # Only treat 5xx/connection issues as "not ready"; surface 4xx other than 404/403 retry
             last_err = exc
-            if exc.code in (403, 404, 502, 503):
-                pass  # may be proxy/startup noise; keep waiting while process lives
         except Exception as exc:  # noqa: BLE001 - collect and retry until timeout
             last_err = exc
         time.sleep(3)
+    tail = "".join(log_buf)[-4000:]
     raise IntegrationTestError(
-        f"Server did not become ready at {url} within {timeout}s. Last error: {last_err}"
+        f"Server did not become ready at {url} within {timeout}s. "
+        f"Last error: {last_err}\nServer log tail:\n{tail}"
     )
 
 
@@ -174,10 +205,16 @@ def start_local_server() -> subprocess.Popen | None:
     env = os.environ.copy()
     env.setdefault("PYTHONUNBUFFERED", "1")
     env.setdefault("PORT", IT_PORT)
+    # Lighter stanza processors in IT/CI unless explicitly disabled
+    env.setdefault("IT_LIGHT_PIPELINE", "1")
     # Avoid interactive SSL issues in CI when stanza/nltk fetch resources
     env.setdefault("STANZA_RESOURCES_DIR", str(REPO_ROOT / "stanza_resources"))
 
-    log(f"Starting local Flask server on port {env['PORT']} (python main.py)...")
+    log(
+        f"Starting local Flask server on port {env['PORT']} "
+        f"(IT_LIGHT_PIPELINE={env.get('IT_LIGHT_PIPELINE')})..."
+    )
+    # Stream server logs line-by-line so CI failures are debuggable
     proc = subprocess.Popen(
         [sys.executable, "main.py"],
         cwd=str(REPO_ROOT),
@@ -235,6 +272,7 @@ def main() -> int:
     failures: list[str] = []
     proc: subprocess.Popen | None = None
     server_log = ""
+    log_buf: list[str] = []
 
     try:
         test_required_files_exist()
@@ -244,7 +282,12 @@ def main() -> int:
 
     try:
         proc = start_local_server()
-        wait_for_server(BASE_URL.rstrip("/") + "/", SERVER_START_TIMEOUT, proc=proc)
+        wait_for_server(
+            BASE_URL.rstrip("/") + "/",
+            SERVER_START_TIMEOUT,
+            proc=proc,
+            log_buf=log_buf,
+        )
 
         try:
             test_homepage(BASE_URL)
@@ -265,7 +308,10 @@ def main() -> int:
     except Exception as exc:  # noqa: BLE001
         failures.append(f"unexpected error: {exc}")
     finally:
+        _drain_proc_stdout(proc, log_buf)
         server_log = stop_server(proc)
+        if not server_log:
+            server_log = "".join(log_buf)
         if not server_log and proc is not None:
             server_log = run_server_output_tail(proc)
 
@@ -275,7 +321,7 @@ def main() -> int:
             log(f" - {f}")
         if server_log:
             log("==== SERVER LOG (tail) ====")
-            print(server_log[-6000:], flush=True)
+            print(server_log[-8000:], flush=True)
         return 1
 
     log("==== ALL INTEGRATION TESTS PASSED ====")

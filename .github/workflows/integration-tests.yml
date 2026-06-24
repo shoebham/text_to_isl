@@ -67,9 +67,20 @@ jobs:
           # Stanza may use spaCy tokenizer; ensure a lightweight English model is available
           python -m spacy download en_core_web_sm || true
 
+      - name: Pre-download Stanza English models
+        run: |
+          set -euo pipefail
+          # Warm models in a dedicated step so IT only starts the server/tests
+          python - <<'PY'
+          import stanza
+          stanza.download('en', model_dir='stanza_resources')
+          print('stanza models ready')
+          PY
+
       - name: Run integration tests
         env:
           PORT: '5055'
+          IT_LIGHT_PIPELINE: '1'
           IT_SERVER_START_TIMEOUT: '900'
           IT_REQUEST_TIMEOUT: '300'
           IT_TEST_INPUT: 'Hello world'
