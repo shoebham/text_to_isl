@@ -2,3 +2,5 @@ Flask==3.0.3
 nltk==3.8.1
 six==1.16.0
 stanza==1.8.2
+# Stanza 1.8 model checkpoints need torch.load(weights_only=False); pin below 2.6
+torch>=2.0,<2.6

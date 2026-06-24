@@ -97,7 +97,16 @@ def download_required_packages():
 
 
 # Pipeline for stanza (calls spacy for tokenizer)
-en_nlp = stanza.Pipeline('en',processors={'tokenize':'spacy'})	
+# Optional IT_LIGHT_PIPELINE=1 uses only tokenize/pos/lemma (enough for ISL conversion,
+# much lighter for CI). Default keeps full pipeline for normal app runs.
+if os.environ.get('IT_LIGHT_PIPELINE', '').lower() in ('1', 'true', 'yes'):
+	en_nlp = stanza.Pipeline(
+		'en',
+		processors='tokenize,pos,lemma',
+		tokenize_no_ssplit=False,
+	)
+else:
+	en_nlp = stanza.Pipeline('en', processors={'tokenize': 'spacy'})
 # print(stopwords.words('english'))
 
 # stop words that are not to be included in ISL
@@ -399,4 +408,5 @@ def serve_signfiles(path):
 
 
 if __name__=="__main__":
-    app.run(host='0.0.0.0')
+    # PORT env var lets CI/integration tests avoid conflicts (e.g. macOS AirPlay on 5000)
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', '5000')))

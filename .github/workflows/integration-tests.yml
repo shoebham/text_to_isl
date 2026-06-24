@@ -1,0 +1,102 @@
+name: Integration Tests
+
+on:
+  push:
+    branches: [main, add-integration-tests, '**']
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: integration-tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  app-integration:
+    name: App files + server + text output
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java (required by Stanford Parser / NLTK)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '11'
+
+      - name: Download and extract Stanford Parser
+        run: |
+          set -euo pipefail
+          # Parser is no longer committed (see main / .gitignore); fetch at CI runtime
+          # main.py expects either the extracted dir or a .jar zip beside main.py
+          if [ ! -d stanford-parser-full-2018-10-17 ]; then
+            echo "Downloading stanford-parser-full-2018-10-17.zip..."
+            curl -fsSL -o stanford-parser-full-2018-10-17.jar \
+              "https://nlp.stanford.edu/software/stanford-parser-full-2018-10-17.zip"
+            jar_size=$(wc -c < stanford-parser-full-2018-10-17.jar | tr -d ' ')
+            echo "Downloaded zip size: ${jar_size} bytes"
+            if [ "$jar_size" -lt 1000000 ]; then
+              echo "Download looks too small; aborting"
+              exit 1
+            fi
+            python - <<'PY'
+          import os, zipfile
+          base = os.getcwd()
+          zpath = os.path.join(base, "stanford-parser-full-2018-10-17.jar")
+          with zipfile.ZipFile(zpath) as z:
+              z.extractall(path=base)
+          models_jar = os.path.join(base, "stanford-parser-full-2018-10-17", "stanford-parser-3.9.2-models.jar")
+          models_dir = os.path.join(base, "stanford-parser-full-2018-10-17")
+          model_target = os.path.join(models_dir, "edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz")
+          if not os.path.exists(model_target):
+              with zipfile.ZipFile(models_jar) as z:
+                  z.extractall(path=models_dir)
+          print("stanford parser extracted; model exists:", os.path.exists(model_target))
+          PY
+          else
+            echo "stanford-parser-full-2018-10-17 already present"
+          fi
+          test -f stanford-parser-full-2018-10-17/edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+          cache: pip
+
+      - name: Install Python dependencies
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip setuptools wheel
+          # Pin spaCy to a release that still supports Python 3.9 (used by Dockerfile/app)
+          pip install "spacy>=3.7,<3.8"
+          # CPU torch only in CI (faster install); keep <2.6 for stanza checkpoint loading
+          pip install "torch>=2.0,<2.6" --index-url https://download.pytorch.org/whl/cpu
+          pip install -r requirements.txt
+          # Stanza may use spaCy tokenizer; ensure a lightweight English model is available
+          python -m spacy download en_core_web_sm || true
+
+      - name: Pre-download Stanza English models
+        run: |
+          set -euo pipefail
+          # Warm models in a dedicated step so IT only starts the server/tests
+          python - <<'PY'
+          import stanza
+          stanza.download('en', model_dir='stanza_resources')
+          print('stanza models ready')
+          PY
+
+      - name: Run integration tests
+        env:
+          PORT: '5055'
+          IT_LIGHT_PIPELINE: '1'
+          IT_SERVER_START_TIMEOUT: '900'
+          IT_REQUEST_TIMEOUT: '300'
+          IT_TEST_INPUT: 'Hello world'
+          PYTHONUNBUFFERED: '1'
+        run: |
+          set -euo pipefail
+          python tests/integration/test_app_running.py
