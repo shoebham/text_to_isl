@@ -12,6 +12,7 @@ import os
 import signal
 import subprocess
 import sys
+import threading
 import time
 import urllib.error
 import urllib.parse
@@ -77,25 +78,22 @@ def test_required_files_exist() -> None:
     log(f"All required files present ({len(sign_files)} sigml files, jar={jar_size} bytes)")
 
 
-def _drain_proc_stdout(proc: subprocess.Popen | None, collected: list[str]) -> None:
-    """Non-blocking-ish read of any available stdout lines into collected."""
-    if proc is None or proc.stdout is None:
-        return
-    import select
+def _start_log_reader(proc: subprocess.Popen, collected: list[str]) -> threading.Thread:
+    """Continuously drain server stdout so the process cannot block on a full pipe."""
 
-    try:
-        while True:
-            ready, _, _ = select.select([proc.stdout], [], [], 0)
-            if not ready:
-                break
-            line = proc.stdout.readline()
-            if not line:
-                break
-            collected.append(line)
-            # Mirror server output in IT logs for CI debugging
-            print(line, end="", flush=True)
-    except Exception:
-        pass
+    def _reader() -> None:
+        if proc.stdout is None:
+            return
+        try:
+            for line in proc.stdout:
+                collected.append(line)
+                print(line, end="", flush=True)
+        except Exception:
+            pass
+
+    t = threading.Thread(target=_reader, name="server-log-reader", daemon=True)
+    t.start()
+    return t
 
 
 def wait_for_server(
@@ -108,17 +106,8 @@ def wait_for_server(
     last_err = None
     log_buf = log_buf if log_buf is not None else []
     while time.time() < deadline:
-        _drain_proc_stdout(proc, log_buf)
         if proc is not None and proc.poll() is not None:
-            _drain_proc_stdout(proc, log_buf)
-            if proc.stdout:
-                try:
-                    rest = proc.stdout.read() or ""
-                    if rest:
-                        log_buf.append(rest)
-                        print(rest, end="", flush=True)
-                except Exception:
-                    pass
+            time.sleep(0.2)  # let log reader flush
             tail = "".join(log_buf)[-6000:]
             raise IntegrationTestError(
                 f"Server process exited early with code {proc.returncode}. Output tail:\n{tail}"
@@ -227,19 +216,9 @@ def start_local_server() -> subprocess.Popen | None:
     return proc
 
 
-def stop_server(proc: subprocess.Popen | None) -> str:
+def stop_server(proc: subprocess.Popen | None) -> None:
     if proc is None:
-        return ""
-    output_chunks: list[str] = []
-
-    def _drain() -> None:
-        if proc.stdout:
-            try:
-                for line in proc.stdout:
-                    output_chunks.append(line)
-            except Exception:
-                pass
-
+        return
     try:
         if proc.poll() is None:
             proc.send_signal(signal.SIGTERM)
@@ -248,30 +227,15 @@ def stop_server(proc: subprocess.Popen | None) -> str:
             except subprocess.TimeoutExpired:
                 proc.kill()
                 proc.wait(timeout=5)
-    finally:
-        _drain()
-
-    return "".join(output_chunks)
-
-
-def run_server_output_tail(proc: subprocess.Popen | None, max_chars: int = 4000) -> str:
-    if proc is None or proc.stdout is None:
-        return ""
-    # Non-blocking-ish: only used on failure paths after wait
-    try:
-        data = proc.stdout.read()
-        if not data:
-            return ""
-        return data[-max_chars:]
     except Exception:
-        return ""
+        pass
 
 
 def main() -> int:
     os.chdir(REPO_ROOT)
     failures: list[str] = []
     proc: subprocess.Popen | None = None
-    server_log = ""
+    log_reader: threading.Thread | None = None
     log_buf: list[str] = []
 
     try:
@@ -282,6 +246,8 @@ def main() -> int:
 
     try:
         proc = start_local_server()
+        if proc is not None:
+            log_reader = _start_log_reader(proc, log_buf)
         wait_for_server(
             BASE_URL.rstrip("/") + "/",
             SERVER_START_TIMEOUT,
@@ -308,13 +274,11 @@ def main() -> int:
     except Exception as exc:  # noqa: BLE001
         failures.append(f"unexpected error: {exc}")
     finally:
-        _drain_proc_stdout(proc, log_buf)
-        server_log = stop_server(proc)
-        if not server_log:
-            server_log = "".join(log_buf)
-        if not server_log and proc is not None:
-            server_log = run_server_output_tail(proc)
+        stop_server(proc)
+        if log_reader is not None:
+            log_reader.join(timeout=5)
 
+    server_log = "".join(log_buf)
     if failures:
         log("==== INTEGRATION TESTS FAILED ====")
         for f in failures:
