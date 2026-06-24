@@ -2,5 +2,6 @@
 /corenlp_parser_test.py
 .DS_Store
 stanford-parser-full-2018-10-17/
+stanford-parser-full-2018-10-17.jar
 stanza_resources/
 
